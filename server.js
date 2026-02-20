@@ -1,11 +1,11 @@
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
+
 const app = express();
 app.use(express.static("public"));
+
 const server = http.createServer(app);
-
-
 
 const io = new Server(server, {
   cors: { origin: "*" }
@@ -21,41 +21,31 @@ io.on("connection", (socket) => {
     users[socket.id] = name;
     io.to(tableId).emit("user-connected", {
       name: name,
-     player: tables[tableId]?.players?.length || 0
-     });
-  })
+      player: tables[tableId]?.players?.length || 0
+    });
+  });
 
   socket.on("user-disconnected", ({name, tableId}) => {
     io.to(tableId).emit("utente-disconnected", name);
     delete users[socket.id];
 
-    // Rimuovi dai tavoli
     for (const [tableId, table] of Object.entries(tables)) {
       table.players = table.players.filter(p => p.id !== socket.id);
       io.to(tableId).emit("tableUpdate", table);
     }
   });
 
-
   socket.on("ping-test", () => {
-  console.log("PING ricevuto da", socket.id);
-  socket.emit("pong-test");
-});
-
-//chat per tavolo
-socket.on("table-message", ({tableId, message}) => {
-  const name = users[socket.id];
-  console.log(name, message);
-  io.to(tableId).emit("table-message", {
-    name, 
-    message
+    console.log("PING ricevuto da", socket.id);
+    socket.emit("pong-test");
   });
-})
 
+  socket.on("table-message", ({tableId, message}) => {
+    const name = users[socket.id];
+    io.to(tableId).emit("table-message", { name, message });
+  });
 
-  // CREAZIONE TAVOLO
   socket.on("createTable", ({ tableId, userName }) => {
-    console.log("createTable ricevuto:", tableId, userName);
     if (!tables[tableId]) {
       tables[tableId] = { players: [] };
     }
@@ -66,13 +56,9 @@ socket.on("table-message", ({tableId, message}) => {
     });
 
     socket.join(tableId);
-
-    
-      io.to(tableId).emit("table-created", tableId);
-
+    io.to(tableId).emit("table-created", tableId);
   });
 
-  // JOIN TAVOLO
   socket.on("joinTable", ({ tableId, userName }) => {
     if (!tables[tableId]) {
       socket.emit("errorMsg", "Tavolo inesistente");
@@ -86,9 +72,12 @@ socket.on("table-message", ({tableId, message}) => {
 
     socket.join(tableId);
     io.to(tableId).emit("tableUpdate", tables[tableId]);
-
-    console.log("joinTable ricevuto:", tableId, userName);
-
   });
 });
 
+// PORTA CORRETTA PER RENDER
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+  console.log("Server avviato su porta", PORT);
+});
