@@ -1,4 +1,4 @@
-const socket = io("https://poker-xkko.onrender.com");
+const socket = io("https://pokerapp-k2qf.onrender.com");
 const client = supabase.createClient(
   "https://wktoqnsagqazlfmeelgk.supabase.co",
   "sb_publishable_LaLNLi8aEojSrbkCgFRSWQ_1kG6Pnj5"

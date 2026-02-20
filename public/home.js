@@ -3,7 +3,7 @@ const client = supabase.createClient(
   "sb_publishable_LaLNLi8aEojSrbkCgFRSWQ_1kG6Pnj5"
 );
 // 🔌 Collegamento al server Socket.IO su Render
-const socket = io("https://poker-xkko.onrender.com", {
+const socket = io("https://pokerapp-k2qf.onrender.com", {
   transports: ["websocket"]
 });
 
