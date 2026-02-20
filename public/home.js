@@ -9,7 +9,11 @@ const socket = io("https://pokerapp-k2qf.onrender.com", {
 
 async function loadUser() {
   
+  if(sessionStorage.getItem("user_name") === null){
+    window.location.href = "loginRegister.html";
+  }else{
   document.querySelector(".name").textContent = sessionStorage.getItem("user_name");
+  }
 }
 
 loadUser();

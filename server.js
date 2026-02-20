@@ -20,8 +20,7 @@ io.on("connection", (socket) => {
   socket.on("new-user", ({name, tableId}) => {
     users[socket.id] = name;
     io.to(tableId).emit("user-connected", {
-      name: name,
-      player: tables[tableId]?.players?.length || 0
+      name
     });
   });
 

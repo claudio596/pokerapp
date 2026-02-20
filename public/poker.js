@@ -40,10 +40,12 @@ appendMessage(`${data.name}: ${data.message}`);
 })
 
 //user-connected
-socket.on('user-connected', data => {
-       if (data.name === localStorage.getItem("user_name")) return;
-    appendMessage(`${data.name} joined`);
-    document.querySelector(".numplayer .num").textContent = data.player;
+socket.on('user-connected', name => {
+  const num_player = document.querySelector(".num-player .num").textContent;
+  num_player=Number(num_player)+1;
+  document.querySelector(".num-player .num").textContent = num_player;
+       if (name === localStorage.getItem("user_name")) return;
+    appendMessage(`${name} joined`);
 })
 
 socket.on('utente-disconnected', name => {
@@ -81,7 +83,7 @@ socket.emit('joinTable', {
 socket.emit("ping-test");
 
 socket.emit('new-user', { 
-  name: data.name, 
+  name: sessionStorage.getItem("user_name"), 
   tableId: sessionStorage.getItem("table_id") 
 });
 
