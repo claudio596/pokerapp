@@ -35,21 +35,24 @@ socket.on("pong-test", () => {
 
 //appende il messaggio nella chat
 socket.on('table-message', data => {
-     if (data.name === localStorage.getItem("user_name")) return;
+     if (data.name === sessionStorage.getItem("user_name")) return;
 appendMessage(`${data.name}: ${data.message}`);
 })
 
 //user-connected
 socket.on('user-connected', name => {
-  const num_player = document.querySelector(".num-player .num").textContent;
+  let num_player = document.querySelector(".num-player .num").textContent;
   num_player=Number(num_player)+1;
   document.querySelector(".num-player .num").textContent = num_player;
-       if (name === localStorage.getItem("user_name")) return;
+       if (name === sessionStorage.getItem("user_name")) return;
     appendMessage(`${name} joined`);
 })
 
 socket.on('utente-disconnected', name => {
     appendMessage(`${name} left`);
+    let num_player = document.querySelector(".num-player .num").textContent;
+  num_player=Number(num_player)-1;
+  document.querySelector(".num-player .num").textContent = num_player;
 })
 
 
