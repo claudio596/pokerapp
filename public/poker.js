@@ -79,6 +79,13 @@ function appendMessage(message){
 async function loadUser() {
   document.querySelector(".name").textContent = sessionStorage.getItem("user_name");
 
+  const li = document.createElement("li"); 
+  li.textContent = "Utente: " + sessionStorage.getItem("user_name");
+  document.querySelector(".connection-info").appendChild(li);
+
+  li.textContent = "Tavolo: " + sessionStorage.getItem("table_id");
+  document.querySelector(".connection-info").appendChild(li);
+
 socket.emit('joinTable', { 
   tableId: sessionStorage.getItem("table_id"),
   userName: sessionStorage.getItem("user_name")
