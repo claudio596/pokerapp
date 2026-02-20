@@ -11,27 +11,35 @@ const io = new Server(server, {
   cors: { origin: "*" }
 });
 
-const tables = {};
-const users = {};
+const tables = [];
+const users = [];
 
 io.on("connection", (socket) => {
   console.log("Nuovo client:", socket.id);
 
   socket.on("new-user", ({name, tableId}) => {
-    users[socket.id] = name;
+    users.push = { name: name, id: tableId, socketId: socket.id };
+    let table_players= tables.find(t => t.id === tableId).players;
+    table_players= Number(table_players)+1;
+    tables.find(t => t.id === tableId).players=table_players;
     io.to(tableId).emit("user-connected", {
-      name
+      name:name,
+      num:table_players
     });
   });
 
   socket.on("user-disconnected", ({name, tableId}) => {
-    io.to(tableId).emit("utente-disconnected", name);
-    delete users[socket.id];
+    users=users.filter(u => u.socketId != socket.id);
+    let table_players= tables.find(t => t.id === tableId).players;
+    table_players= Number(table_players)-1;
+    tables.find(t => t.id === tableId).players=table_players;
 
-    for (const [tableId, table] of Object.entries(tables)) {
-      table.players = table.players.filter(p => p.id !== socket.id);
-      io.to(tableId).emit("tableUpdate", table);
-    }
+
+    io.to(tableId).emit("utente-disconnected", {
+      name:name,
+      num:table_players
+    });
+  
   });
 
   socket.on("ping-test", () => {
@@ -45,14 +53,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("createTable", ({ tableId, userName }) => {
-    if (!tables[tableId]) {
-      tables[tableId] = { players: [] };
-    }
-
-    tables[tableId].players.push({
-      id: socket.id,
-      name: userName
-    });
+      tables.push = { players: 0, id: tableId };
 
     socket.join(tableId);
     io.to(tableId).emit("table-created", tableId);

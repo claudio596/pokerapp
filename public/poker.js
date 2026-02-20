@@ -40,19 +40,15 @@ appendMessage(`${data.name}: ${data.message}`);
 })
 
 //user-connected
-socket.on('user-connected', name => {
-  let num_player = document.querySelector(".num-player .num").textContent;
-  num_player=Number(num_player)+1;
-  document.querySelector(".num-player .num").textContent = num_player;
-       if (name === sessionStorage.getItem("user_name")) return;
-    appendMessage(`${name} joined`);
+socket.on('user-connected', data => {
+  document.querySelector(".num-player .num").textContent = data.num;
+       if (data.name === sessionStorage.getItem("user_name")) return;
+    appendMessage(`${data.name} joined`);
 })
 
-socket.on('utente-disconnected', name => {
-    appendMessage(`${name} left`);
-    let num_player = document.querySelector(".num-player .num").textContent;
-  num_player=Number(num_player)-1;
-  document.querySelector(".num-player .num").textContent = num_player;
+socket.on('utente-disconnected', data => {
+    appendMessage(`${data.name} left`);
+  document.querySelector(".num-player .num").textContent = data.num;
 })
 
 
@@ -79,7 +75,7 @@ function appendMessage(message){
 async function loadUser() {
   document.querySelector(".name").textContent = sessionStorage.getItem("user_name");
 
-  const li = document.createElement("li"); 
+  let li = document.createElement("li"); 
   li.textContent = "Utente: " + sessionStorage.getItem("user_name");
   document.querySelector(".connection-info").appendChild(li);
 
