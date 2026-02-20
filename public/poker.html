@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+  /* Reset */ 
+  body, html{ font-family: 'Intro', Arial, Helvetica, sans-serif; line-height: 1; font-size: 16px; box-sizing: border-box;margin: 0;padding: 0;}*,*:before,*:after{ box-sizing: border-box; }h1,h2,h3,h4,h5,h6, p, ol, ul{margin: 0 0 1rem 0;padding: 0;}ol,ul{padding-left: 20px;line-height: 1.5;}img{height: auto;}h1{font-size: 4rem;} h2{font-size: 3rem;} h3{font-size: 2rem;} h4{font-size: 1rem;} h5{font-size: 0.8rem;} h6{font-size: 0.6rem;}a{text-decoration:none}
+  </style>
+<link rel="stylesheet" href="poker.css">
+<script src="https://kit.fontawesome.com/97566e8d05.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+  <div class="body">
+      <div class="menu">
+        <div class="exit">
+            <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
+        </div>
+        <h4>tavolo: <strong id="tableid"></strong></h4>
+        <div class="num-player">
+            <p class="num">0</p>
+            <i class="fa-solid fa-users "></i>
+        </div>
+        <div class="player">
+            <p class="name"></p>
+            <i class="fa-solid fa-circle-user fa-lg"></i>
+        </div>
+    </div>
+  
+    <div class="allmessage">
+<div id="message-container"></div>
+ <form id="send-container">
+    <input type="text" id="message-input">
+    <button type="submit" id="send-button">send</button>
+ </form>
+</div>
+
+<div class="websocket">
+    <div class="connection-menu">
+        <h5>connessione</h5>
+        <i class="fa-solid fa-arrow-down"></i>
+    </div>
+<ul class="connection-info">
+    
+</ul>
+</div>
+  </div>
+
+
+<div class="exit-content">
+    <p>sei sicuro di voler uscire?</p>
+    <div class="button">
+      <button class="no-exit">no,gioca ancora</button>
+      <button class="si-exit">si,esci</button>
+    </div>
+  </div>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script defer src="poker.js"></script>
+</body>
+</html>

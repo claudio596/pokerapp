@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+  /* Reset */ 
+  body, html{ font-family: 'Intro', Arial, Helvetica, sans-serif; line-height: 1; font-size: 16px; box-sizing: border-box;margin: 0;padding: 0;}*,*:before,*:after{ box-sizing: border-box; }h1,h2,h3,h4,h5,h6, p, ol, ul{margin: 0 0 1rem 0;padding: 0;}ol,ul{padding-left: 20px;line-height: 1.5;}img{height: auto;}h1{font-size: 4rem;} h2{font-size: 3rem;} h3{font-size: 2rem;} h4{font-size: 1rem;} h5{font-size: 0.8rem;} h6{font-size: 0.6rem;}a{text-decoration:none}
+  .flex{
+    display: grid;
+    place-items: center;
+  }
+  .content{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    background-color: rgba(207, 207, 207, 0.308);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px black;
+  }
+
+  .input{
+    display: grid;
+    place-items: center;
+    row-gap: 10px;
+  }
+
+  #signup, #login{
+    display: grid;
+    row-gap: 10px;
+  }
+
+  #signup-content{
+    display: none;
+  }
+  
+  .signup-p, .login-p{
+    cursor: pointer;
+  }
+
+  .signup-p:hover, .login-p:hover{
+    text-decoration: underline;
+    color: rgba(59, 59, 247, 0.397);
+    font-size: 1.1rem;
+}
+  
+  </style>
+
+</head>
+<body>
+
+    <div class="content">
+        <div class="input" id="signup-content">
+            <h3>sign up</h3>
+            <form id="signup">
+                <div class="flex">
+                    <label for="name">nome:</label>
+                <input type="text" id="nameregister">
+                </div>
+                <div class="flex">
+                    <label for="password">password:</label>
+                <input type="password" id="passwordregister">
+                </div>
+                <div class="flex">
+                    <button type="submit">sign up</button>
+                </div>
+            </form>
+           <div class="flex">
+             <p>sei già iscritto? </p>
+            <p class="login-p">login</p>
+           </div>
+        </div>
+
+        <div class="input" id="login-content">
+            <h3>login</h3>
+             <form id="login" >
+                <div class="flex">
+                    <label for="name">nome:</label>
+                <input type="text" id="name">
+                </div>
+                <div class="flex">
+                    <label for="password">password:</label>
+                <input type="password" id="password">
+                </div>
+                <div class="flex">
+                    <button type="submit">login</button>
+                </div>
+            </form>
+            <div class="flex">
+                <p>non sei ancora iscritto?</p>
+                <p class="signup-p">sign up</p>
+            </div>
+        </div>
+    </div>
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+
+
+</body>
+</html>

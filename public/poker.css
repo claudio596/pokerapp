@@ -1,0 +1,123 @@
+body{
+    background-color: green;
+}
+.allmessage{
+    display: grid;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(196, 196, 196, 0.185);
+}
+#message-container{
+    height: 150px;
+    overflow: scroll;
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    scrollbar-width: none;
+}
+
+.player{
+    display: flex;
+    gap: 5px;
+    align-items: baseline;
+    justify-content: center;
+}
+#message-container::-webkit-scrollbar{
+    display: none;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: last baseline;
+    padding: 5px;
+}
+
+.num-player{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.num-player p{
+    font-weight: bold;
+}
+
+
+.exit{
+    cursor: pointer;
+}
+
+.exit:hover{
+    color: red;
+}
+
+
+.dimmed {
+  opacity: 0.1;
+  pointer-events: none; /* evita click sugli elementi oscurati */
+}
+.exit-content {
+    display: none;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: absolute;
+  z-index: 9999;
+  border: 1px solid black;
+  padding: 15px;
+  place-items: center;
+  gap: 10px;
+  width: fit-content;
+  height: fit-content;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: grey;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px black;
+}
+
+.exit-content .button{
+    display: flex;
+    gap: 5px;
+    width: 90%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.websocket{
+    display: grid;
+    margin-left: 4px;
+    max-width: 150px;
+    max-height: 200px;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.websocket::-webkit-scrollbar{
+    display: none;
+}
+
+.connection-menu{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: last baseline;
+    gap: 5px;
+    border-bottom:1px solid black ;
+}
+
+.connection-info{
+    border: 1px solid black;
+    height: fit-content;
+}
+
+.connection-info li{
+     max-width: 100%;
+    padding: 2px;
+    white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 10px;
+}

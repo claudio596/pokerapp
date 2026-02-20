@@ -1,0 +1,74 @@
+.menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: last baseline;
+    background-color: rgba(70, 54, 5, 0.445);
+    padding: 5px;
+}
+.profile{
+    display: flex;
+    gap: 3px;
+    align-items: baseline;
+    justify-content: center;
+}
+.profile i{
+    cursor: pointer;
+}
+.gioca{
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px black;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: hsla(0, 0%, 63%, 0.164);
+}
+
+.exit{
+    cursor: pointer;
+}
+
+.exit:hover{
+    color: red;
+}
+
+/*
+all'exit
+*/
+.dimmed {
+  opacity: 0.1;
+  pointer-events: none; /* evita click sugli elementi oscurati */
+}
+.exit-content {
+    display: none;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: absolute;
+  z-index: 9999;
+  border: 1px solid black;
+  padding: 15px;
+  place-items: center;
+  gap: 10px;
+  width: fit-content;
+  height: fit-content;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: grey;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px black;
+}
+
+.exit-content .button{
+    display: flex;
+    gap: 5px;
+    width: 90%;
+    justify-content: space-evenly;
+    align-items: center;
+}
