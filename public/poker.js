@@ -35,11 +35,13 @@ socket.on("pong-test", () => {
 
 //appende il messaggio nella chat
 socket.on('table-message', data => {
-    appendMessage(`${data.name}: ${data.message}`)
+     if (data.name === localStorage.getItem("user_name")) return;
+appendMessage(`${data.name}: ${data.message}`);
 })
 
 //user-connected
 socket.on('user-connected', data => {
+       if (data.name === localStorage.getItem("user_name")) return;
     appendMessage(`${data.name} joined`);
     document.querySelector(".numplayer .num").textContent = data.player;
 })
@@ -53,7 +55,7 @@ messageForm.addEventListener('submit', e => {
     e.preventDefault();
     const message = messageInput.value;
     appendMessage(`you: ${message}`);// il messaggio che invi vieni appeso anche alla propria chat
-    const tableId = localStorage.getItem("table_id");
+    const tableId = sessionStorage.getItem("table_id");
     socket.emit('table-message', {
         tableId,
         message
@@ -70,30 +72,17 @@ function appendMessage(message){
 }
 
 async function loadUser() {
-  const userId = localStorage.getItem("user_id");
-
-  if (!userId) {
-    window.location.href = "loginRegister.html";
-    return;
-  }
-
-  const { data, error } = await client
-    .from("users_custom")
-    .select("name")
-    .eq("id", userId)
-    .single();
-
-  document.querySelector(".name").textContent = localStorage.getItem("user_name");
+  document.querySelector(".name").textContent = sessionStorage.getItem("user_name");
 
 socket.emit('joinTable', { 
-  tableId: localStorage.getItem("table_id"),
-  userName: data.name
+  tableId: sessionStorage.getItem("table_id"),
+  userName: sessionStorage.getItem("user_name")
 });
 socket.emit("ping-test");
 
 socket.emit('new-user', { 
   name: data.name, 
-  tableId: localStorage.getItem("table_id") 
+  tableId: sessionStorage.getItem("table_id") 
 });
 
 
@@ -101,14 +90,14 @@ appendMessage(`you joined`);
 }
 window.addEventListener('load', () => {
 loadUser();
-const tableid = localStorage.getItem("table_id");
+const tableid = sessionStorage.getItem("table_id");
 document.getElementById("tableid").textContent = tableid;
 });
 
 window.addEventListener('beforeunload', () => {
   socket.emit('user-disconnected',{
     name: document.querySelector(".name").textContent,
-    tableId: localStorage.getItem("table_id")
+    tableId: sessionStorage.getItem("table_id")
   });
 });
 
@@ -129,7 +118,7 @@ document.querySelector(".si-exit").addEventListener("click", () => {
   window.location.href = "home.html";
   socket.emit('user-disconnected',{
     name: document.querySelector(".name").textContent,
-    tableId: localStorage.getItem("table_id")
+    tableId: sessionStorage.getItem("table_id")
   });
 });
 

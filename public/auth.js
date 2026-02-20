@@ -39,8 +39,7 @@ document.getElementById("signup").addEventListener("submit", async (e) => {
   }
 
   // Salva sessione locale
-  localStorage.setItem("user_id", data.id);
-
+  sessionStorage.setItem("user_name", data.id);
   window.location.href = "home.html";
 });
 
@@ -67,7 +66,7 @@ document.getElementById("login").addEventListener("submit", async (e) => {
 
 
   // Salva sessione locale
-  localStorage.setItem("user_id", data.id);
+  sessionStorage.setItem("user_name", data.name);
 
   window.location.href = "home.html";
 });

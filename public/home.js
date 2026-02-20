@@ -8,20 +8,8 @@ const socket = io("https://pokerapp-k2qf.onrender.com", {
 });
 
 async function loadUser() {
-  const userId = localStorage.getItem("user_id");
-
-  if (!userId) {
-    window.location.href = "loginRegister.html";
-    return;
-  }
-
-  const { data, error } = await client
-    .from("users_custom")
-    .select("name")
-    .eq("id", userId)
-    .single();
-
-  document.querySelector(".name").textContent = data.name;
+  
+  document.querySelector(".name").textContent = sessionStorage.getItem("user_name");
 }
 
 loadUser();
@@ -54,8 +42,8 @@ document.getElementById("create-table").addEventListener("click", () => {
   const tableId = Math.random().toString(36).substring(2, 8);
   const userName = document.querySelector(".name").textContent;
 
-  localStorage.setItem("table_id", tableId);
-  localStorage.setItem("user_name", userName);
+  sessionStorage.setItem("table_id", tableId);
+
 
   // Invia al server
   socket.emit("createTable", {
@@ -91,7 +79,7 @@ document.getElementById("join-Table").addEventListener("click", () => {
 
 function joinTable(){
   const tableId = document.getElementById("tableId").value;
-  localStorage.setItem("table_id", tableId);
+  sessionStorage.setItem("table_id", tableId);
  const userName = document.querySelector(".name").textContent;
 
   socket.emit("joinTable", {
