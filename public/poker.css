@@ -121,3 +121,11 @@ body{
   overflow-wrap: break-word;
   font-size: 10px;
 }
+
+.connection_menu i{
+    cursor: pointer;
+}
+
+.connection_menu i:hover{
+   color: rgba(0, 0, 0, 0.589);
+}

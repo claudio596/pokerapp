@@ -55,6 +55,7 @@ document.getElementById("create-table").addEventListener("click", () => {
   const userName = document.querySelector(".name").textContent;
 
   localStorage.setItem("table_id", tableId);
+  localStorage.setItem("user_name", userName);
 
   // Invia al server
   socket.emit("createTable", {
