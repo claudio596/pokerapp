@@ -52,6 +52,7 @@ async function waitForServer(url) {
     if (!result.loading) {
         div.style.display="none";
         bodyContent.style.display = "block";
+        document.body.style.backgroundColor = "green";
       ready = true;
       return true;
     }
@@ -87,11 +88,12 @@ async function checkServerStatus(url, timeout) {
 
 async function loadUser() {
   document.querySelector(".name").textContent = sessionStorage.getItem("user_name");
-  let li = document.createElement("li"); 
+  const li = document.createElement("li"); 
   li.textContent = "Utente: " + sessionStorage.getItem("user_name");
   document.querySelector(".connection-info").appendChild(li);
 
-  li.textContent = "Tavolo: " + sessionStorage.getItem("table_id");
+  const li2 = document.createElement("li"); 
+  li2.textContent = "Tavolo: " + sessionStorage.getItem("table_id");
   document.querySelector(".connection-info").appendChild(li);
 
 socket.emit('joinTable', { 
