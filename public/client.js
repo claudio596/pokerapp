@@ -154,9 +154,9 @@ socket.on('user-connected', data => {
     appendMessage(`${data.name} joined`);
 })
 
-socket.on('player-list-complete', data =>{
-    for(let i = 0; i < data.length; i++){
-        appendPlayerList(data[i]);
+socket.on('player-list-complete', userPast =>{
+    for(let i = 0; i < userPast.length; i++){
+        appendPlayerList(userPast[i]);
     }
 })
 
