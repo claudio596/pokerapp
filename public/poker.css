@@ -153,12 +153,6 @@
     display: none;
 }
 
-.player-list li:nth-child(1){
-    text-align: right;
-    border-bottom: 1px solid black;
-    color: black;
-    width: 100%;
-}
 
 .player-list li{
     width: 100%; 

@@ -12,7 +12,7 @@ const messageContainer =  document.getElementById('message-container');
 
 function appendPlayerList(name){
   const li = document.createElement("li");
-  li.textContent = `
+  li.innerHTML = `
 <i class="fa-solid fa-person fa-xs" style="color: rgb(255, 255, 255);"></i>   
  <p>${name}</p>
   `;
@@ -94,7 +94,7 @@ async function loadUser() {
 
   const li2 = document.createElement("li"); 
   li2.textContent = "Tavolo: " + sessionStorage.getItem("table_id");
-  document.querySelector(".connection-info").appendChild(li);
+  document.querySelector(".connection-info").appendChild(li2);
 
 socket.emit('joinTable', { 
   tableId: sessionStorage.getItem("table_id"),
