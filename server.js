@@ -11,8 +11,8 @@ const io = new Server(server, {
   cors: { origin: "*" }
 });
 
-const tables = [];
-const users = [];
+let tables = [];
+let users = [];
 
 io.on("connection", (socket) => {
   console.log("Nuovo client:", socket.id);
@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
     let table_players= tables.find(t => t.id === tableId).players;
     table_players= Number(table_players)-1;
     tables.find(t => t.id === tableId).players=table_players;
-
+    tables= tables.filter(t => t.players > 0);
 
     io.to(tableId).emit("utente-disconnected", {
       name:name,
