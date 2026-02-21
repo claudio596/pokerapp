@@ -24,14 +24,7 @@ io.on("connection", (socket) => {
   console.log("Nuovo client:", socket.id);
 
   socket.on("new-user", ({name, tableId}) => {
-    users.push({ name: name, id: tableId, socketId: socket.id });
-    let table_players= tables.find(t => t.id === tableId).players;
-    table_players= Number(table_players)+1;
-    tables.find(t => t.id === tableId).players=table_players;
-    io.to(tableId).emit("user-connected", {
-      name:name,
-      num:table_players
-    });
+  
   });
 
 socket.on("leave-table", ({ tableId, name }) => {
@@ -103,6 +96,14 @@ socket.on("leave-table", ({ tableId, name }) => {
     socket.emit("table-not-found", tableId);
     return;
   }
+    users.push({ name: userName, id: tableId, socketId: socket.id });
+    let table_players= tables.find(t => t.id === tableId).players;
+    table_players= Number(table_players)+1;
+    tables.find(t => t.id === tableId).players=table_players;
+    io.to(tableId).emit("user-connected", {
+      name:userName,
+      num:table_players
+    });
 
     users.push({ name: userName, id: tableId, socketId: socket.id });
     socket.join(tableId);
