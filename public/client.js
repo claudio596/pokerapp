@@ -165,19 +165,13 @@ socket.on('utente-disconnected', data => {
 }
 
 window.addEventListener('load', async() => {
-   await waitForServer("https://pokerapp-k2qf.onrender.com");
+   await waitForServer("https://pokerapp-k2qf.onrender.com/ping");
    socket = io("https://pokerapp-k2qf.onrender.com");
-const tableid = sessionStorage.getItem("table_id");
+
   setupSocketEvents(); // ora i listener vengono registrati
 
   loadUser();
+  const tableid = sessionStorage.getItem("table_id");
 document.getElementById("tableid").textContent = tableid;
 
-});
-
-window.addEventListener('beforeunload', () => {
-  socket.emit('user-disconnected',{
-    name: document.querySelector(".name").textContent,
-    tableId: sessionStorage.getItem("table_id")
-  });
 });

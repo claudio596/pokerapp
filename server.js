@@ -2,13 +2,20 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 
+
 const app = express();
+const cors = require("cors");
+app.use(cors());
 app.use(express.static("public"));
 
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: { origin: "*" }
+});
+
+app.get("/ping", (req, res) => {
+  res.status(200).send("pong");
 });
 
 let tables = [];
@@ -28,19 +35,52 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("user-disconnected", ({name, tableId}) => {
-    users=users.filter(u => u.socketId != socket.id);
-    let table_players= tables.find(t => t.id === tableId).players;
-    table_players= Number(table_players)-1;
-    tables.find(t => t.id === tableId).players=table_players;
-    tables= tables.filter(t => t.players > 0);
+socket.on("leave-table", ({ tableId, name }) => {
+  const table = tables.find(t => t.id === tableId);
+  if (!table) return;
 
-    io.to(tableId).emit("utente-disconnected", {
-      name:name,
-      num:table_players
-    });
-  
+  // Rimuovi l’utente dalla lista
+  users = users.filter(u => u.socketId !== socket.id);
+
+  // Decrementa i giocatori
+  table.players--;
+
+  // Se il tavolo è vuoto → eliminalo
+  if (table.players <= 0) {
+    tables = tables.filter(t => t.id !== tableId);
+    console.log("Tavolo eliminato:", tableId);
+  }
+
+  // Notifica gli altri utenti
+  io.to(tableId).emit("utente-disconnected", {
+    name,
+    num: table.players
   });
+
+  // Fai uscire il socket dalla stanza
+  socket.leave(tableId);
+});
+
+  socket.on("disconnect", () => {
+    const user = users.find(u => u.socketId === socket.id);
+    if (!user) return;
+
+    const table = tables.find(t => t.id === user.id);
+    if (!table) return;
+
+    table.players--;
+    if (table.players <= 0) {
+      tables = tables.filter(t => t.id !== user.id);
+    }
+
+    io.to(user.id).emit("utente-disconnected", {
+      name: user.name,
+      num: table.players
+    });
+
+    users = users.filter(u => u.socketId !== socket.id);
+  });
+
 
   socket.on("ping-test", () => {
     console.log("PING ricevuto da", socket.id);
@@ -59,9 +99,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("joinTable", ({ tableId, userName }) => {
-    tables= tables.filter(t => t.id === tableId);
-  if(tables== null){
+    const tablesEntried= tables.find(t => t.id === tableId);
+  if(!tablesEntried){
     socket.emit("table-not-found", tableId);
+    return;
   }
 
     tables.find(t => t.id === tableId).players=Number(tables.find(t => t.id === tableId).players)+1;

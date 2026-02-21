@@ -8,11 +8,12 @@ document.querySelector(".exit").addEventListener("click", () => {
 
 
 document.querySelector(".si-exit").addEventListener("click", () => {
-  window.location.href = "home.html";
-  socket.emit('user-disconnected',{
-    name: document.querySelector(".name").textContent,
-    tableId: sessionStorage.getItem("table_id")
-  });
+  
+  socket.emit("leave-table", {
+  tableId: sessionStorage.getItem("table_id"),
+  name: sessionStorage.getItem("user_name")
+});
+window.location.href = "home.html";
 });
 
 document.querySelector(".no-exit").addEventListener("click", () => {
