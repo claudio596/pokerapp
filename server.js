@@ -86,31 +86,33 @@ socket.on("leave-table", ({ tableId, name }) => {
     io.to(tableId).emit("table-created", tableId);
   });
 
-  socket.on("joinTable", ({ tableId, userName, socketId }) => {
-    const tablesEntried= tables.find(t => t.id === tableId);
-  if(!tablesEntried){
+socket.on("joinTable", ({ tableId, userName, socketId }) => {
+  const table = tables.find(t => t.id === tableId);
+  if (!table) {
     socket.emit("table-not-found", tableId);
     return;
   }
-    let table_players= tables.find(t => t.id === tableId).players;
-    table_players= Number(table_players)+1;
-    tables.find(t => t.id === tableId).players=table_players;
-      let userPast= [];
-    for (let i = 0; i < users.length; i++) {
-       userPast.push(users[i].name);
-    }
-    
-    io.to(tableId).emit("user-connected", {
-      name:userName,
-      num:table_players
-    });
 
-        io.to(socketId).emit("player-list-complete",  userPast);
+  table.players++;
 
-    users.push({ name: userName, id: tableId, socketId: socket.id });
-    socket.join(tableId);
+  // lista utenti già presenti
+  const userPast = users
+    .filter(u => u.id === tableId)
+    .map(u => u.name);
 
+  // invia la lista completa SOLO al nuovo utente
+  io.to(socket.id).emit("player-list-complete", userPast);
+
+  // notifica SOLO gli altri utenti
+  socket.to(tableId).emit("user-connected", {
+    name: userName,
+    num: table.players
   });
+
+  users.push({ name: userName, id: tableId, socketId: socket.id });
+  socket.join(tableId);
+});
+
 });
 
 // PORTA CORRETTA PER RENDER
