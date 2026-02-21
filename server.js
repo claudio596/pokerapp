@@ -104,9 +104,7 @@ socket.on("leave-table", ({ tableId, name }) => {
     return;
   }
 
-    tables.find(t => t.id === tableId).players=Number(tables.find(t => t.id === tableId).players)+1;
     users.push({ name: userName, id: tableId, socketId: socket.id });
-
     socket.join(tableId);
   });
 });

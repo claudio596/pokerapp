@@ -161,6 +161,10 @@ socket.on('user-connected', data => {
 
 socket.on('utente-disconnected', data => {
     appendMessage(`${data.name} left`);
+    const li = [...document.querySelectorAll(".player-list li")]
+  .find(li => li.querySelector("p")?.textContent === data.name);
+
+if (li) li.remove();
   document.querySelector(".num-player .num").textContent = data.num;
 })
 
