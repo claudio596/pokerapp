@@ -106,7 +106,7 @@ socket.on("joinTable", ({ tableId, userName, socketId }) => {
   // lista utenti già presenti
   const userPast = users.filter(u => u.id === tableId).map(u => u.name);
   // invia la lista completa SOLO al nuovo utente
-  io.to(socket.id).emit("player-list-complete",{ 
+  io.to(socketId).emit("player-list-complete",{ 
     userPast: userPast,
     num: tables.find(t => t.id === tableId).players
   });
