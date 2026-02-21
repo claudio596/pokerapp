@@ -85,11 +85,6 @@ function joinTable(){
   const tableId = document.getElementById("tableId").value;
   sessionStorage.setItem("table_id", tableId);
  const userName = document.querySelector(".name").textContent;
-
-  socket.emit("joinTable", {
-    tableId,
-    userName
-  });
-
+ 
    window.location.href = `poker.html`;
 }
