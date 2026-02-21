@@ -89,7 +89,7 @@ socket.on("leave-table", ({ tableId, name }) => {
 socket.on("joinTable", ({ tableId, userName, socketId }) => {
   const table = tables.find(t => t.id === tableId);
   if (!table) {
-    socket.emit("table-not-found", tableId);
+    io.to(socket.id).emit("table-not-found", tableId);
     return;
   }
 
@@ -104,12 +104,12 @@ socket.on("joinTable", ({ tableId, userName, socketId }) => {
   io.to(socket.id).emit("player-list-complete", userPast);
 
   // notifica SOLO gli altri utenti
-  socket.to(tableId).emit("user-connected", {
+  io.to(tableId).emit("user-connected", {
     name: userName,
     num: table.players
   });
 
-  users.push({ name: userName, id: tableId, socketId: socket.id });
+  users.push({ name: userName, id: tableId, socketId: socketId });
   socket.join(tableId);
 });
 
