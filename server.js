@@ -23,10 +23,6 @@ let users = [];
 io.on("connection", (socket) => {
   console.log("Nuovo client:", socket.id);
 
-  socket.on("new-user", ({name, tableId}) => {
-  
-  });
-
 socket.on("leave-table", ({ tableId, name }) => {
   const table = tables.find(t => t.id === tableId);
   if (!table) return;
@@ -90,23 +86,30 @@ socket.on("leave-table", ({ tableId, name }) => {
     io.to(tableId).emit("table-created", tableId);
   });
 
-  socket.on("joinTable", ({ tableId, userName }) => {
+  socket.on("joinTable", ({ tableId, userName, socketId }) => {
     const tablesEntried= tables.find(t => t.id === tableId);
   if(!tablesEntried){
     socket.emit("table-not-found", tableId);
     return;
   }
-    users.push({ name: userName, id: tableId, socketId: socket.id });
     let table_players= tables.find(t => t.id === tableId).players;
     table_players= Number(table_players)+1;
     tables.find(t => t.id === tableId).players=table_players;
+      let userPast= [];
+    for (let i = 0; i < users.length; i++) {
+       userPast.push(users[i].name);
+    }
+    
     io.to(tableId).emit("user-connected", {
       name:userName,
       num:table_players
     });
 
+        io.to(socketId).emit("player-list-complete",  userPast);
+
     users.push({ name: userName, id: tableId, socketId: socket.id });
     socket.join(tableId);
+
   });
 });
 

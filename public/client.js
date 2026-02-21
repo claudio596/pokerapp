@@ -98,15 +98,10 @@ async function loadUser() {
 
 socket.emit('joinTable', { 
   tableId: sessionStorage.getItem("table_id"),
-  userName: sessionStorage.getItem("user_name")
+  userName: sessionStorage.getItem("user_name"),
+  socketId: socket.id
 });
 socket.emit("ping-test");
-
-socket.emit('new-user', { 
-  name: sessionStorage.getItem("user_name"), 
-  tableId: sessionStorage.getItem("table_id") 
-});
-
 
 appendMessage(`you joined`);
 }
@@ -157,6 +152,12 @@ socket.on('user-connected', data => {
   document.querySelector(".num-player .num").textContent = data.num;
        if (data.name === sessionStorage.getItem("user_name")) return;
     appendMessage(`${data.name} joined`);
+})
+
+socket.on('player-list-complete', data =>{
+    for(let i = 0; i < data.length; i++){
+        appendPlayerList(data[i]);
+    }
 })
 
 socket.on('utente-disconnected', data => {
