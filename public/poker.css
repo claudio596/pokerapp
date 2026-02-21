@@ -1,5 +1,6 @@
-body{
+.body{
     background-color: green;
+    display: none;
 }
 
 
@@ -170,4 +171,29 @@ body{
 .player-list li p{
 font-size: smaller;
     color: white;
+}
+
+/*loader icon*/
+.double-spinner{
+    width: 25px;
+    aspect-ratio: 1/1;
+    border: 5px solid transparent;
+    border-radius: 50%;
+    border-color: rgb(0, 119, 225) transparent rgb(0, 119, 225) transparent;
+    animation: double-spin 1.7s linear infinite;
+}
+
+@keyframes double-spin{
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.connection-state{
+    display: grid;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    place-items: center;
 }
