@@ -18,7 +18,7 @@ io.on("connection", (socket) => {
   console.log("Nuovo client:", socket.id);
 
   socket.on("new-user", ({name, tableId}) => {
-    users.push = { name: name, id: tableId, socketId: socket.id };
+    users.push({ name: name, id: tableId, socketId: socket.id });
     let table_players= tables.find(t => t.id === tableId).players;
     table_players= Number(table_players)+1;
     tables.find(t => t.id === tableId).players=table_players;
@@ -47,31 +47,27 @@ io.on("connection", (socket) => {
     socket.emit("pong-test");
   });
 
-  socket.on("table-message", ({tableId, message}) => {
-    const name = users[socket.id];
+  socket.on("table-message", ({tableId, message,name}) => {
     io.to(tableId).emit("table-message", { name, message });
   });
 
   socket.on("createTable", ({ tableId, userName }) => {
-      tables.push = { players: 0, id: tableId };
+      tables.push({ players: 0, id: tableId });
 
     socket.join(tableId);
     io.to(tableId).emit("table-created", tableId);
   });
 
   socket.on("joinTable", ({ tableId, userName }) => {
-    if (!tables[tableId]) {
-      socket.emit("errorMsg", "Tavolo inesistente");
-      return;
-    }
+    tables= tables.filter(t => t.id === tableId);
+  if(tables== null){
+    socket.emit("table-not-found", tableId);
+  }
 
-    tables[tableId].players.push({
-      id: socket.id,
-      name: userName
-    });
+    tables.find(t => t.id === tableId).players=Number(tables.find(t => t.id === tableId).players)+1;
+    users.push({ name: userName, id: tableId, socketId: socket.id });
 
     socket.join(tableId);
-    io.to(tableId).emit("tableUpdate", tables[tableId]);
   });
 });
 

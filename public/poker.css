@@ -1,6 +1,8 @@
 body{
     background-color: green;
 }
+
+
 .allmessage{
     display: grid;
     position: absolute;
@@ -39,6 +41,7 @@ body{
     justify-content: center;
     align-items: baseline;
     gap: 5px;
+    cursor: pointer;
 }
 
 .num-player p{
@@ -128,4 +131,43 @@ body{
 
 .connection_menu i:hover{
    color: rgba(0, 0, 0, 0.589);
+}
+
+.player-list{
+    display: none;
+    gap: 5px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    width: 100px;
+    height: 100px;
+    overflow: scroll;   
+    scrollbar-width: none;
+    background-color: hsla(0, 0%, 0%, 0.61);
+    position: absolute;
+    top:
+}
+
+.player-list::-webkit-scrollbar{
+    display: none;
+}
+
+.player-list li:nth-child(1){
+    text-align: right;
+    border-bottom: 1px solid black;
+    color: black;
+    width: 100%;
+}
+
+.player-list li{
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.player-list li p{
+font-size: smaller;
+    color: white;
 }
