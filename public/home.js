@@ -84,7 +84,6 @@ document.getElementById("join-Table").addEventListener("click", () => {
 function joinTable(){
   const tableId = document.getElementById("tableId").value;
   sessionStorage.setItem("table_id", tableId);
- const userName = document.querySelector(".name").textContent;
- 
+
    window.location.href = `poker.html`;
 }
