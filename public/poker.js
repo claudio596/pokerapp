@@ -39,7 +39,7 @@ document.querySelector(".websocket i").addEventListener("click", () => {
 })
 
 document.querySelector(".num-player").addEventListener("click", () => {
-  const elem = document.getElementById(".num-player");
+  const elem = document.querySelector(".num-player");
   const menu = document.querySelector(".menu");
 const leftposition = elem.getBoundingClientRect().left;
 const div = document.querySelector(".player-list");
