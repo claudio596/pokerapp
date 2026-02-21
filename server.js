@@ -95,8 +95,7 @@ socket.on("joinTable", ({ tableId, userName, socketId }) => {
 
   tables.find(t => t.id === tableId).players++;
 
-  // lista utenti già presenti
-  const userPast = users.filter(u => u.id === tableId).map(u => u.name);
+  
 
   // notifica SOLO gli altri utenti
   io.to(tableId).emit("user-connected", {
@@ -105,6 +104,9 @@ socket.on("joinTable", ({ tableId, userName, socketId }) => {
   });
 
   users.push({ name: userName, id: tableId, socketId: socketId });
+  // lista utenti già presenti
+  const userPast = users.filter(u => u.id === tableId).map(u => u.name);
+
   // invia la lista completa SOLO al nuovo utente
   io.to(socket.id).emit("player-list-complete", userPast);
   socket.join(tableId);
