@@ -154,10 +154,12 @@ socket.on('user-connected', data => {
     appendMessage(`${data.name} joined`);
 })
 
-socket.on('player-list-complete', userPast =>{
-    for(let i = 0; i < userPast.length; i++){
-        appendPlayerList(userPast[i]);
+socket.on('player-list-complete', data =>{
+    for(let i = 0; i < data.userPast.length; i++){
+        appendPlayerList(data.userPast[i]);
     }
+      document.querySelector(".num-player .num").textContent = data.num;
+
 })
 
 socket.on('utente-disconnected', data => {
