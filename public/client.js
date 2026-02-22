@@ -98,8 +98,7 @@ async function loadUser() {
 
 socket.emit('joinTable', { 
   tableId: sessionStorage.getItem("table_id"),
-  userName: sessionStorage.getItem("user_name"),
-  socketId: socket.id
+  userName: sessionStorage.getItem("user_name")
 });
 socket.emit("ping-test");
 
@@ -112,11 +111,13 @@ function setupSocketEvents(){
 
     //controllo connessione
 socket.on("connect", () => {
-  console.log("Connesso al server! ID:", socket.id);
   const li = document.createElement("li");
   li.textContent = "Connesso al server! ID: " + socket.id;
   document.querySelector(".connection-info").appendChild(li);
   socket.emit("ping-test");
+    loadUser();
+  const tableid = sessionStorage.getItem("table_id");
+document.getElementById("tableid").textContent = tableid;
   console.log(socket.io.uri);
 });
 
@@ -181,9 +182,5 @@ window.addEventListener('load', async() => {
    socket = io("https://pokerapp-k2qf.onrender.com");
 
   setupSocketEvents(); // ora i listener vengono registrati
-
-  loadUser();
-  const tableid = sessionStorage.getItem("table_id");
-document.getElementById("tableid").textContent = tableid;
 
 });

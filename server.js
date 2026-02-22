@@ -117,7 +117,7 @@ socket.on("joinTable", ({ tableId, userName }) => {
 
   // Invia SOLO al nuovo utente
   socket.emit("player-list-complete", {
-    userPast,
+    userPast: userPast,
     num: num_player
   });
 
