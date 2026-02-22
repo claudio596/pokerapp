@@ -131,6 +131,11 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   socket.join(tableId);
 });
 
+socket.on("check-table", (tableId, callback) => {
+  const exists = tables.some(t => t.id === tableId);
+  callback(exists);
+});
+
 });
 
 // PORTA CORRETTA PER RENDER
