@@ -57,14 +57,15 @@ socket.on("leave-table", ({ tableId, name }) => {
     if (!table) return;
 
     table.players--;
-    if (table.players <= 0) {
-      tables = tables.filter(t => t.id !== user.id);
-    }
 
     io.to(user.id).emit("utente-disconnected", {
       name: user.name,
       num: table.players
     });
+
+    if (table.players <= 0) {
+      tables = tables.filter(t => t.id !== user.id);
+    }
 
     users = users.filter(u => u.socketId !== socket.id);
   });
@@ -86,31 +87,40 @@ socket.on("leave-table", ({ tableId, name }) => {
     io.to(socketId).emit("table-created", tableId);
   });
 
-socket.on("joinTable", ({ tableId, userName, socketId }) => {
+socket.on("joinTable", ({ tableId, userName }) => {
   const table = tables.find(t => t.id === tableId);
   if (!table) {
-    io.to(socketId).emit("table-not-found", tableId);
+    socket.emit("table-not-found", tableId);
     return;
   }
 
-  tables.find(t => t.id === tableId).players++;
+  table.players++;
 
-  const num_player=tables.find(t => t.id === tableId).players;
-  // notifica SOLO gli altri utenti
+  users.push({
+    name: userName,
+    id: tableId,
+    socketId: socket.id
+  });
+
+  const num_player = table.players;
+
+  // Notifica agli altri
   socket.to(tableId).emit("user-connected", {
     name: userName,
     num: num_player
   });
 
-  users.push({ name: userName, id: tableId, socketId: socketId });
+  // Lista utenti già presenti
+  const userPast = users
+    .filter(u => u.id === tableId)
+    .map(u => u.name);
 
-  // lista utenti già presenti
-  const userPast = users.filter(u => u.id === tableId).map(u => u.name);
-  // invia la lista completa SOLO al nuovo utente
-  io.to(socketId).emit("player-list-complete",{ 
-    userPast: userPast,
+  // Invia SOLO al nuovo utente
+  socket.emit("player-list-complete", {
+    userPast,
     num: num_player
   });
+
   socket.join(tableId);
 });
 
