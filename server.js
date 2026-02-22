@@ -79,26 +79,27 @@ socket.on("leave-table", ({ tableId, name }) => {
     io.to(tableId).emit("table-message", { name, message });
   });
 
-  socket.on("createTable", ({ tableId, userName }) => {
+  socket.on("createTable", ({ tableId, socketId }) => {
       tables.push({ players: 0, id: tableId });
 
     socket.join(tableId);
-    io.to(tableId).emit("table-created", tableId);
+    io.to(socketId).emit("table-created", tableId);
   });
 
 socket.on("joinTable", ({ tableId, userName, socketId }) => {
   const table = tables.find(t => t.id === tableId);
   if (!table) {
-    io.to(socket.id).emit("table-not-found", tableId);
+    io.to(socketId).emit("table-not-found", tableId);
     return;
   }
 
   tables.find(t => t.id === tableId).players++;
 
+  const num_player=tables.find(t => t.id === tableId).players;
   // notifica SOLO gli altri utenti
   socket.to(tableId).emit("user-connected", {
     name: userName,
-    num: tables.find(t => t.id === tableId).players
+    num: num_player
   });
 
   users.push({ name: userName, id: tableId, socketId: socketId });
@@ -108,7 +109,7 @@ socket.on("joinTable", ({ tableId, userName, socketId }) => {
   // invia la lista completa SOLO al nuovo utente
   io.to(socketId).emit("player-list-complete",{ 
     userPast: userPast,
-    num: tables.find(t => t.id === tableId).players
+    num: num_player
   });
   socket.join(tableId);
 });

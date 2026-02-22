@@ -52,7 +52,7 @@ document.getElementById("create-table").addEventListener("click", () => {
   // Invia al server
   socket.emit("createTable", {
     tableId,
-    userName
+    socketId: socket.id
   });
 
   console.log("Tavolo creato:", tableId);

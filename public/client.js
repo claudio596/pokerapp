@@ -150,8 +150,11 @@ appendMessage(`${data.name}: ${data.message}`);
 socket.on('user-connected', data => {
     appendPlayerList(data.name);
   document.querySelector(".num-player .num").textContent = data.num;
+  
+  /*
        if (data.name === sessionStorage.getItem("user_name")) return;
-    appendMessage(`${data.name} joined`);
+    */
+   appendMessage(`${data.name} joined`);
 })
 
 socket.on('player-list-complete', data =>{
