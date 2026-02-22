@@ -100,7 +100,7 @@ async function loadUser() {
     sessionStorage.setItem("user_uid", crypto.randomUUID());
   }
 
-  const user_uid = localStorage.getItem("user_uid");
+  const user_uid = sessionStorage.getItem("user_uid");
 
 
 socket.emit('joinTable', { 
@@ -216,7 +216,7 @@ function showReconnectingOverlay(reason){
 
 
 function attemptReconnect(){
-  const userId=sessionStorage.getItem("user_uid");
+  const user_uid=sessionStorage.getItem("user_uid");
   const userName=sessionStorage.getItem("user_name");
   const tableId=sessionStorage.getItem("table_id");
   const interval = setInterval(() => {
@@ -227,11 +227,11 @@ function attemptReconnect(){
       socket.emit("check-table", tableId, (exists) => {
         if (!exists) {
           // Ricrea il tavolo
-          socket.emit("createTable", tableId);
+          socket.emit("createTable", {tableId});
         }
 
         // Rientra nel tavolo
-        socket.emit("joinTable", { tableId, userName, userId });
+        socket.emit("joinTable", { tableId, userName, user_uid });
 
         document.querySelector(".body").style.display="block";
         document.querySelector(".reconnection").style.display="none";
