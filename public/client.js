@@ -43,16 +43,21 @@ function appendMessage(message){
 //controllo connessione server
 async function waitForServer(url) {
   let ready = false;
-    const p = document.querySelector(".connection-state p");
-    const bodyContent= document.querySelector(".body");
-    const div= document.querySelector(".connection-state");
+  const p = document.querySelector(".connection-state p");
+  const bodyContent = document.querySelector(".body");
+  const div = document.querySelector(".connection-state");
+
+
+  // 🔥 AGGIUNGI QUI IL DELAY
+  await new Promise(r => setTimeout(r, 50));
+
   while (!ready) {
     const result = await checkServerStatus(url, 5000);
 
     if (!result.loading) {
-        div.style.display="none";
-        bodyContent.style.display = "block";
-        document.body.style.backgroundColor = "green";
+      div.style.display = "none";
+      bodyContent.style.display = "block";
+      document.body.style.backgroundColor = "green";
       ready = true;
       return true;
     }
@@ -66,7 +71,10 @@ async function checkServerStatus(url, timeout) {
   const timer = setTimeout(() => controller.abort(), timeout);
 
   try {
-    const res = await fetch(url, { signal: controller.signal });
+    const res = await fetch(url, {
+      signal: controller.signal, 
+      cache: "no-cache" 
+    });
 
     clearTimeout(timer);
 

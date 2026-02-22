@@ -102,13 +102,13 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
     name: userName,
     id: tableId,
     socketId: socket.id,
-    user_Id: user_uid
+    user_uid
   });
   }else{
     user.socketId = socket.id;
   }
 
-  table.players++;
+  table.players = users.filter(u => u.id === tableId).length;
   const num_player = table.players;
 
   // Notifica agli altri
