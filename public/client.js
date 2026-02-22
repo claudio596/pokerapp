@@ -96,9 +96,17 @@ async function loadUser() {
   li2.textContent = "Tavolo: " + sessionStorage.getItem("table_id");
   document.querySelector(".connection-info").appendChild(li2);
 
+  if(!sessionStorage.getItem("user_uid")){
+    sessionStorage.setItem("user_uid", crypto.randomUUID());
+  }
+
+  const user_uid = localStorage.getItem("user_uid");
+
+
 socket.emit('joinTable', { 
   tableId: sessionStorage.getItem("table_id"),
-  userName: sessionStorage.getItem("user_name")
+  userName: sessionStorage.getItem("user_name"),
+  user_uid: user_uid
 });
 socket.emit("ping-test");
 
@@ -175,6 +183,15 @@ if (li) li.remove();
   document.querySelector(".num-player .num").textContent = data.num;
 })
 
+socket.on("disconnect", (reason) => {
+  console.log("Disconnesso:", reason);
+
+  if (reason !== "io client disconnect") {
+    showReconnectingOverlay(reason);
+  }
+});
+
+
 }
 
 window.addEventListener('load', async() => {
@@ -184,3 +201,10 @@ window.addEventListener('load', async() => {
   setupSocketEvents(); // ora i listener vengono registrati
 
 });
+
+
+function showReconnectingOverlay(reason){
+  const reconnect= document.querySelector(".reconnection");
+  const p = document.querySelector(".reconnection p");
+  p.textContent = `disconnessione: ${reason}`;
+}

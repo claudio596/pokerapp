@@ -80,28 +80,35 @@ socket.on("leave-table", ({ tableId, name }) => {
     io.to(tableId).emit("table-message", { name, message });
   });
 
-  socket.on("createTable", ({ tableId, socketId }) => {
+  socket.on("createTable", ({ tableId }) => {
       tables.push({ players: 0, id: tableId });
 
     socket.join(tableId);
-    io.to(socketId).emit("table-created", tableId);
+    socket.emit("table-created", tableId);
   });
 
-socket.on("joinTable", ({ tableId, userName }) => {
+socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   const table = tables.find(t => t.id === tableId);
   if (!table) {
     socket.emit("table-not-found", tableId);
     return;
   }
 
-  table.players++;
+  const user = users.find(u => u.user_Id === user_uid);
 
-  users.push({
+  if(!user){
+    //nuovo utente
+    users.push({
     name: userName,
     id: tableId,
-    socketId: socket.id
+    socketId: socket.id,
+    user_Id: user_uid
   });
+  }else{
+    user.socketId = socket.id;
+  }
 
+  table.players++;
   const num_player = table.players;
 
   // Notifica agli altri
