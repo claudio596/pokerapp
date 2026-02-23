@@ -6,7 +6,8 @@
     })
 
     socket.on("player-pronti", user_pronti =>{
-        const div= document.querySelector(".game-options .info p strong");
+        console.log(user_pronti);
+        const div= document.querySelector(".game-options .info p pronti");
         if(user_pronti == -1){
             document.querySelector(".game-options .option").style.display="none";
             document.querySelector(".game-options .info").innerHTML=`
@@ -19,7 +20,8 @@ div.textContent=user_pronti;
     })
 }
  function startPlayer(){
-    let num= document.querySelector(".game-options .info p .pronti").textContent;
+    let num= document.querySelector(" .pronti").textContent;
+    console.log(num);
     socket.emit("player-pronti", {
         num:num,
         tableId: sessionStorage.getItem("table_id")

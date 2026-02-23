@@ -155,8 +155,7 @@ socket.on("check-table", (tableId, callback) => {
 socket.on("player-pronti", (num,tableId) => {
   let user_pronti = Number(num);
   user_pronti++;
-  socket.to(tableId).emit("player-pronti", user_pronti);
-  socket.emit("player-pronti", user_pronti);
+  io.to(tableId).emit("player-pronti", user_pronti);
 });
 
 });
