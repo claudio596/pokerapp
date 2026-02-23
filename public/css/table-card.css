@@ -68,9 +68,8 @@
     transform: translate(-50%, -50%);
 }
 
-.game-options .info strong{
+.game-options .info  .point{
     animation: compare 1.5s infinite;
-  
 }
 
 @keyframes compare{
@@ -81,13 +80,13 @@
     }
 }
 
-.game-options .info strong:nth-child(1){
+.game-options .info .point:nth-child(1){
     animation-delay: 2s;
 }
-.game-options .info strong:nth-child(2){
+.game-options .info  .point:nth-child(2){
     animation-delay: 1s;
 }
-.game-options .info strong:nth-child(3){
+.game-options .info  .point:nth-child(3){
     animation-delay: 0s;
 }
 

@@ -1,6 +1,6 @@
  function setupStartGameEvents(){
     socket.on("table-update", num_player =>{
-        document.querySelector(".game-options .info").innerHTML=`pronto <strong>0</strong>/${num_player}`;
+        document.querySelector(".game-options .info").innerHTML=`pronto <strong class="pronti">0</strong>/${num_player}`;
         document.querySelector(".game-options .option").style.display="block";
     })
 
@@ -10,6 +10,6 @@
     })
 }
  function startPlayer(){
-    let num= document.querySelector(".game-options .info strong").textContent;
+    let num= document.querySelector(".game-options .info p .pronti").textContent;
     socket.emit("player-pronti", num);
 }
