@@ -1,5 +1,5 @@
-.body{
-    display: none;
+body{
+    background-color: green;
 }
 
 
@@ -190,6 +190,7 @@ font-size: smaller;
     transform: translate(-50%, -50%);
     place-items: center;
 }
+
 
 /*reconnection*/
 

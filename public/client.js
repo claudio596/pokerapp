@@ -41,31 +41,40 @@ function appendMessage(message){
 }
 
 //controllo connessione server
-async function waitForServer(url) {
-  let ready = false;
+async function waitForServer(url, {
+  initialDelay = 100,
+  pollInterval = 3000,
+  maxAttempts = 40 // ~2 minuti
+} = {}) {
+
   const p = document.querySelector(".connection-state p");
   const bodyContent = document.querySelector(".body");
   const div = document.querySelector(".connection-state");
 
+  await delay(initialDelay);
 
-  // 🔥 AGGIUNGI QUI IL DELAY
-  await new Promise(r => setTimeout(r, 50));
-
-  while (!ready) {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     const result = await checkServerStatus(url, 5000);
 
     if (!result.loading) {
-      div.style.display = "none";
-      bodyContent.style.display = "block";
-      document.body.style.backgroundColor = "green";
-      ready = true;
+       div.style.display = "none";
+  bodyContent.style.display = "block";
+  document.body.style.backgroundColor = "green";
       return true;
     }
 
-    p.textContent = "Server in avvio..., ci possono volere 20-60 secondi";
-    await new Promise(r => setTimeout(r, 3000));
+    p.textContent = `Server in avvio... tentativo ${attempt}/${maxAttempts}`;
+    await delay(pollInterval);
   }
+
+  p.textContent = "Il server non risponde. Riprova più tardi.";
+  return false;
 }
+
+function delay(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
 async function checkServerStatus(url, timeout) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeout);
