@@ -1,7 +1,4 @@
-const socket = io("https://pokerapp-k2qf.onrender.com");
-
-function setupSocketEvents2(){
-
+export function setupStartGameEvents(socket){
     socket.on("table-update", num_player =>{
         document.querySelector(".game-options .info").innerHTML=`pronto <strong>0</strong>/${num_player}`;
         document.querySelector(".game-options .option").style.display="block";
@@ -12,10 +9,7 @@ function setupSocketEvents2(){
         
     })
 }
-
-setupSocketEvents2();
-
-function startPlayer(){
+export function startPlayer(){
     let num= document.querySelector(".game-options .info strong").textContent;
     socket.emit("player-pronti", num);
 }

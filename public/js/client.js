@@ -1,8 +1,21 @@
-let socket;
+import { initSocket } from "./socket.js";
+import { setupStartGameEvents } from "./startGame.js";
+import { startPlayer } from "./startGame.js";
+
 const client = supabase.createClient(
   "https://wktoqnsagqazlfmeelgk.supabase.co",
   "sb_publishable_LaLNLi8aEojSrbkCgFRSWQ_1kG6Pnj5"
 );
+
+let socket;
+window.addEventListener('load', async() => {
+   await waitForServer("https://pokerapp-k2qf.onrender.com/ping");
+   socket = initSocket();
+
+  setupSocketEvents(); // ora i listener vengono registrati
+  setupStartGameEvents(socket);
+
+});
 
 const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
@@ -188,7 +201,7 @@ socket.on('player-list-complete', data =>{
         appendPlayerList(data.userPast[i]);
     }
       document.querySelector(".num-player .num").textContent = data.num;
-
+      document.querySelector(".reconnection").style.display="none";
 })
 
 socket.on('utente-disconnected', data => {
@@ -207,21 +220,13 @@ socket.on("disconnect", (reason) => {
     showReconnectingOverlay(reason);
   }
 
-  if(data.num < 2){
-    document.querySelector(".game-options .info").innerHtml="<p>in attesa di altri giocatori...</p>";
-  }
 });
+
+
 
 
 }
 
-window.addEventListener('load', async() => {
-   await waitForServer("https://pokerapp-k2qf.onrender.com/ping");
-   socket = io("https://pokerapp-k2qf.onrender.com");
-
-  setupSocketEvents(); // ora i listener vengono registrati
-
-});
 
 
 function showReconnectingOverlay(reason){
