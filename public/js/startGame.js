@@ -1,4 +1,4 @@
-export function setupStartGameEvents(socket){
+ function setupStartGameEvents(){
     socket.on("table-update", num_player =>{
         document.querySelector(".game-options .info").innerHTML=`pronto <strong>0</strong>/${num_player}`;
         document.querySelector(".game-options .option").style.display="block";
@@ -9,7 +9,7 @@ export function setupStartGameEvents(socket){
         
     })
 }
-export function startPlayer(){
+ function startPlayer(){
     let num= document.querySelector(".game-options .info strong").textContent;
     socket.emit("player-pronti", num);
 }

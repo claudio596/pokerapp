@@ -1,7 +1,3 @@
-import { initSocket } from "./socket.js";
-import { setupStartGameEvents } from "./startGame.js";
-import { startPlayer } from "./startGame.js";
-
 const client = supabase.createClient(
   "https://wktoqnsagqazlfmeelgk.supabase.co",
   "sb_publishable_LaLNLi8aEojSrbkCgFRSWQ_1kG6Pnj5"
@@ -10,10 +6,11 @@ const client = supabase.createClient(
 let socket;
 window.addEventListener('load', async() => {
    await waitForServer("https://pokerapp-k2qf.onrender.com/ping");
-   socket = initSocket();
-
+   socket = io("https://pokerapp-k2qf.onrender.com", {
+    transports: ["websocket"]
+   });
   setupSocketEvents(); // ora i listener vengono registrati
-  setupStartGameEvents(socket);
+  setupStartGameEvents();
 
 });
 
@@ -221,9 +218,6 @@ socket.on("disconnect", (reason) => {
   }
 
 });
-
-
-
 
 }
 
