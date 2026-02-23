@@ -137,6 +137,7 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   });
 
   socket.join(tableId);
+
   if(num_player >1 && open_start==false){//deve stare sotto socket.join
     io.to(tableId).emit("table-update", num_player);
     open_start = true;
@@ -154,7 +155,8 @@ socket.on("check-table", (tableId, callback) => {
 socket.on("player-pronti", (num,tableId) => {
   let user_pronti = Number(num);
   user_pronti++;
-  io.to(tableId).emit("player-pronti", user_pronti);
+  socket.to(tableId).emit("player-pronti", user_pronti);
+  socket.emit("player-pronti", user_pronti);
 });
 
 });

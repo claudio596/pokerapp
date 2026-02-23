@@ -22,6 +22,6 @@ div.textContent=user_pronti;
     let num= document.querySelector(".game-options .info p .pronti").textContent;
     socket.emit("player-pronti", {
         num:num,
-        tableId:sessionStorage.getItem("table_id")
+        tableId: sessionStorage.getItem("table_id")
     });
 }
