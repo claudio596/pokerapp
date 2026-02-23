@@ -206,6 +206,10 @@ socket.on("disconnect", (reason) => {
   if (reason !== "io client disconnect") {
     showReconnectingOverlay(reason);
   }
+
+  if(data.num < 2){
+    document.querySelector(".game-options .info").innerHtml="<p>in attesa di altri giocatori...</p>";
+  }
 });
 
 

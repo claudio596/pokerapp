@@ -10,7 +10,8 @@
   /* Reset */ 
   body, html{ font-family: 'Intro', Arial, Helvetica, sans-serif; line-height: 1; font-size: 16px; box-sizing: border-box;margin: 0;padding: 0;}*,*:before,*:after{ box-sizing: border-box; }h1,h2,h3,h4,h5,h6, p, ol, ul{margin: 0 0 1rem 0;padding: 0;}ol,ul{padding-left: 20px;line-height: 1.5;}img{height: auto;}h1{font-size: 4rem;} h2{font-size: 3rem;} h3{font-size: 2rem;} h4{font-size: 1rem;} h5{font-size: 0.8rem;} h6{font-size: 0.6rem;}a{text-decoration:none}
   </style>
-<link rel="stylesheet" href="poker.css">
+<link rel="stylesheet" href="css/poker.css">
+<link rel="stylesheet" href="css/table-card.css">
 <script src="https://kit.fontawesome.com/97566e8d05.js" crossorigin="anonymous"></script>
 
 </head>
@@ -38,6 +39,41 @@
     <input type="text" id="message-input">
     <button type="submit" id="send-button">send</button>
  </form>
+</div>
+
+<div class="table">
+  <div class="pot">
+    <p>pot: <span id="pot">0</span></p>
+  </div>
+  <div class="dealer">
+    <i class="fa-regular fa-circle-user fa-2xl" style="color: rgb(0, 0, 0);"></i>
+  </div>
+  <div class="card">
+    <div class="table-card"></div>
+    <div class="table-card"></div>
+    <div class="table-card"></div>
+    <div class="table-card"></div>
+    <div class="table-card"></div>
+    <div class="table-card"></div>
+  </div>
+</div>
+
+<div class="now-card">
+  <div class="first"></div>
+  <div class="2"></div>
+</div>
+
+<div class="game-options">
+  <div class="info">
+    <p>in attesa di altri giocatori <strong>.</strong><strong>.</strong><strong>.</strong></p>
+  </div>
+  <div class="option">
+    <button onclick="startPlayer();">gioca</button>
+  </div>
+</div>
+
+<div class="event-game">
+
 </div>
 
 <div class="websocket">
@@ -83,7 +119,8 @@
 
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script defer src="client.js"></script>
-<script defer src="poker.js"></script>
+<script defer src="js/client.js"></script>
+<script defer src="js/poker.js"></script>
+<script defer src="js/startGame.js"></script>
 </body>
 </html>

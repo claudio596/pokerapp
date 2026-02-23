@@ -19,6 +19,7 @@ app.get("/ping", (req, res) => {
 
 let tables = [];
 let users = [];
+ let open_start = false;
 
 io.on("connection", (socket) => {
   console.log("Nuovo client:", socket.id);
@@ -111,6 +112,12 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   table.players = users.filter(u => u.id === tableId).length;
   const num_player = table.players;
 
+
+  if(num_player >1 && open_start==false){
+    io.to(tableId).emit("table-update", num_player);
+    open_start = true;
+  }
+
   // Notifica agli altri
   socket.to(tableId).emit("user-connected", {
     name: userName,
@@ -136,6 +143,13 @@ socket.on("check-table", (tableId, callback) => {
   callback(exists);
 });
 
+//game events
+
+socket.on("player-pronti", (num) => {
+  let user_pronti = Number(num);
+  user_pronti++;
+  io.to(tableId).emit("player-pronti", user_pronti);
+});
 });
 
 // PORTA CORRETTA PER RENDER
