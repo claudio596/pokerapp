@@ -1,6 +1,7 @@
  function setupStartGameEvents(){
     socket.on("table-update", num_player =>{
-        document.querySelector(".game-options .info").innerHTML=`pronto <strong class="pronti">0</strong>/${num_player}`;
+        document.querySelector(".game-options .info").innerHTML=`<p>
+        pronto <strong class="pronti">0</strong>/${num_player}</p>`;
         document.querySelector(".game-options .option").style.display="block";
     })
 
