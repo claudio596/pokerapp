@@ -64,6 +64,13 @@ socket.on("leave-table", ({ tableId, name }) => {
       num: table.players
     });
 
+    const a= table.players > 1 ? "0" : "-1";
+    if(a == -1){
+      open_start = false;
+    }
+
+    io.to(user.id).emit("player-pronti", a );
+
     if (table.players <= 0) {
       tables = tables.filter(t => t.id !== user.id);
     }
@@ -112,12 +119,6 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   table.players = users.filter(u => u.id === tableId).length;
   const num_player = table.players;
 
-
-  if(num_player >1 && open_start==false){
-    io.to(tableId).emit("table-update", num_player);
-    open_start = true;
-  }
-
   // Notifica agli altri
   socket.to(tableId).emit("user-connected", {
     name: userName,
@@ -136,6 +137,11 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   });
 
   socket.join(tableId);
+  if(num_player >1 && open_start==false){//deve stare sotto socket.join
+    io.to(tableId).emit("table-update", num_player);
+    open_start = true;
+  }
+
 });
 
 socket.on("check-table", (tableId, callback) => {
@@ -145,11 +151,12 @@ socket.on("check-table", (tableId, callback) => {
 
 //game events
 
-socket.on("player-pronti", (num) => {
+socket.on("player-pronti", (num,tableId) => {
   let user_pronti = Number(num);
   user_pronti++;
   io.to(tableId).emit("player-pronti", user_pronti);
 });
+
 });
 
 // PORTA CORRETTA PER RENDER

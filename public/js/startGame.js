@@ -5,12 +5,23 @@
         document.querySelector(".game-options .option").style.display="block";
     })
 
-    socket.on("player-pronti", user_pronti =>{
- document.querySelector(".game-options .info strong").textContent=user_pronti;
+    socket.on("player-pronti", (user_pronti) =>{
+        const div= document.querySelector(".game-options .info strong");
+        if(user_pronti == -1){
+            document.querySelector(".game-options .option").style.display="none";
+            document.querySelector(".game-options .info").innerHTML=`
+            <p>in attesa di altri giocatori <strong class="point">.</strong><strong class="point">.</strong><strong class="point">.</strong></p>
+            `;
+            return;
+        }
+div.textContent=user_pronti;
         
     })
 }
  function startPlayer(){
     let num= document.querySelector(".game-options .info p .pronti").textContent;
-    socket.emit("player-pronti", num);
+    socket.emit("player-pronti", {
+        num:num,
+        tableId:sessionStorage.getItem("table_id")
+    });
 }
