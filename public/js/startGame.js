@@ -5,8 +5,8 @@
         document.querySelector(".game-options .option").style.display="block";
     })
 
-    socket.on("player-pronti", (user_pronti) =>{
-        const div= document.querySelector(".game-options .info strong");
+    socket.on("player-pronti", user_pronti =>{
+        const div= document.querySelector(".game-options .info p strong");
         if(user_pronti == -1){
             document.querySelector(".game-options .option").style.display="none";
             document.querySelector(".game-options .info").innerHTML=`

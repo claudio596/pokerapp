@@ -64,7 +64,7 @@ socket.on("leave-table", ({ tableId, name }) => {
       num: table.players
     });
 
-    const a= table.players > 1 ? "0" : "-1";
+    const a= table.players > 1 ? 0 : -1;
     if(a == -1){
       open_start = false;
     }
