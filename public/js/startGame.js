@@ -1,13 +1,16 @@
  function setupStartGameEvents(){
     socket.on("table-update", num_player =>{
+         const li = document.createElement("li");
+        li.textContent = `table-update`;
+        document.querySelector(".connection-info").appendChild(li);
         document.querySelector(".game-options .info").innerHTML=`<p>
         pronto <strong class="pronti">0</strong>/${num_player}</p>`;
         document.querySelector(".game-options .option").style.display="block";
     })
 
-    socket.on("player-pronti", user_pronti =>{
+    socket.on("player-pronti", num =>{
         const li = document.createElement("li");
-        li.textContent = `giocatori pronto: ${user_pronti}`;
+        li.textContent = `giocatori pronto: ${num}`;
         document.querySelector(".connection-info").appendChild(li);
         const div= document.querySelector(".pronti");
         if(user_pronti == -1){
@@ -17,7 +20,7 @@
             `;
             return;
         }
-div.textContent=user_pronti;
+div.textContent=num;
         
     })
 }
