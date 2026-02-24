@@ -1,6 +1,5 @@
 .body{
     display: none;
-    color: rgb(82, 79, 79);
 }
 
 
@@ -15,8 +14,8 @@
     height: 150px;
     overflow: scroll;
     display: grid;
-    gap: 4px;
-    padding: 3px;
+    gap: 7px;
+    padding: 7px;
     scrollbar-width: none;
     background-color: rgba(0, 0, 0);
 }
@@ -29,10 +28,10 @@
   height: fit-content;
 }
 #message-container .message-table{
-    color:white;
     font-size: smaller;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
+    border: 1px solid grey;
     padding: 5px;
     display: grid;
     place-items: left;
@@ -46,6 +45,7 @@
     display: flex;
     justify-content: left;
     padding-left: 1px;
+     color:white;
 }
 
 #message-container .message-table .message{
@@ -53,6 +53,7 @@
     justify-content: left;
     padding-left: 4px;
     font-size: 14px;
+     color:white;
 }
 
 
@@ -74,6 +75,7 @@
     padding: 5px;
     background-color: green;
     color: black;
+    border-bottom:1px solid black;
 }
 
 .num-player{
