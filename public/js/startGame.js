@@ -21,7 +21,7 @@
             return;
         }
 div.textContent=`${num}`;
-const total_player= document.querySelector(".num-player.num").textContent;
+const total_player= document.querySelector(".num-player .num").textContent;
 if(total_player == num){
     document.querySelector(".game-options .option").innerHtml="";
     document.querySelector(".game-options .info").innerHTML=`
