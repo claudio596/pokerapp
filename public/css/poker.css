@@ -95,12 +95,7 @@
     margin-left: 4px;
     max-width: 150px;
     max-height: 200px;
-    overflow: scroll;
-    scrollbar-width: none;
-}
-
-.websocket::-webkit-scrollbar{
-    display: none;
+    
 }
 
 .connection-menu{
@@ -123,6 +118,11 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   font-size: 10px;
+  overflow: scroll;
+    scrollbar-width: none;
+}
+.connection-info::-webkit-scrollbar{
+    display: none;
 }
 
 .connection-menu i{
