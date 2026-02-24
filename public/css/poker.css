@@ -248,6 +248,7 @@ font-size: smaller;
 }
 
 .event-game{
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -258,16 +259,40 @@ font-size: smaller;
     font-size: 30px;
     z-index: 9999;
     animation: flash 2s ease-in-out;
+    place-items: center;
+    height: fit-content;
+    width: fit-content;
 }
 
 @keyframes flash{
          0%{
-        opacity: 1;
+        display: grid;
+            opacity: 1;
         }50%{
             transform: scale(1.2);
         }100%{
             opacity: 0;
-            z-index: -1;
+            display: none;
         }
     
+    }
+
+
+    .game-utils{
+        display: grid;
+        place-items: center;
+        width: 150px;
+        height: 150px;
+    }
+
+    .game-utils.fold{
+        background-color: rgb(35, 139, 236);
+    }
+
+    .game-utils.call{
+        background-color: greenyellow;
+    }
+
+    .game-utils.check{
+        background-color: gold;
     }

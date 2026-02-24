@@ -22,7 +22,10 @@ let users = [];
 let tables_inGame=[];
  let open_start = false;
  let init_game=false;
- let card=["1F","2F","3F","4F","5F","6F"];
+ let card=["1F","2F","3F","4F","5F","6F","7F",
+  "8F","9F","10F","JF","QF","KF"
+
+ ];
 
 io.on("connection", (socket) => {
   console.log("Nuovo client:", socket.id);
