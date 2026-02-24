@@ -20,7 +20,7 @@
             `;
             return;
         }
-div.textContent="num";
+div.textContent=`${num}`;
         
     })
 }
