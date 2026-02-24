@@ -37,6 +37,7 @@
     place-items: left;
     width: 100%;
   height: fit-content;
+  color: white;
 }
 
 #message-container .message-table .name{
