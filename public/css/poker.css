@@ -32,30 +32,38 @@
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     border: 1px solid grey;
-    padding: 5px;
     display: grid;
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
   height: fit-content;
   color: white;
 }
 
 #message-container .message-table .name{
     font-weight: bold;
-    font-size: 7px;
+    font-size: 10px;
     display: flex;
+    width: 100%;
+    text-align: left;
     justify-content: left;
-    padding-left: 1px;
-     color:white;
+    padding-left: 3px;
+    padding-bottom: 2px;
+    color:grey;
+    border-bottom: 1px solid grey;
 }
 
 #message-container .message-table .message{
     display: flex;
     justify-content: left;
     padding-left: 4px;
-    font-size: 14px;
+    font-size: 16px;
      color:white;
+    overflow-wrap: break-word; /* moderno */
+    word-wrap: break-word;     /* compatibilità */
+    white-space: normal;       /* permette l'andata a capo */
+    height: fit-content;
+    width: 100%;
 }
-
 
 
 .player{
