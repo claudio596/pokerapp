@@ -13,17 +13,8 @@
         li.textContent = `giocatori pronto: ${num}`;
         document.querySelector(".connection-info").appendChild(li);
         const div= document.querySelector(".pronti");
-        if(num == -1){
-            document.querySelector(".game-options .option").style.display="none";
-            document.querySelector(".game-options .info").innerHTML=`
-            <p>in attesa di altri giocatori <strong class="point">.</strong><strong class="point">.</strong><strong class="point">.</strong></p>
-            `;
-            return;
-        }
-div.textContent=`${num}`;
-        document.querySelector(".game-options .option").innerHTML=`
-        <button onclick="rimuoviPronto();">rimuovi gioca</button>
-        `;
+        div.textContent=`${num}`;
+
 const total_player= document.querySelector(".num-player .num").textContent;
 if(total_player == num){
     document.querySelector(".game-options .option").innerHTML="";
@@ -43,6 +34,13 @@ if(total_player == num){
 
 //fine player pronti
     });
+
+
+    socket.on("remove-button-gioca", ()=>{
+        document.querySelector(".game-options .option").innerHTML=`
+        <button onclick="rimuoviPronto();">rimuovi gioca</button>
+        `;
+    })
 
     socket.on("game-message", message => {
         document.querySelector(".event-game").innerText = message;
@@ -81,4 +79,9 @@ function rimuoviPronto(){
         num:-1,
         tableId: sessionStorage.getItem("table_id")
     });
+
+    document.querySelector(".game-options .option").innerHTML=`
+          <button onclick="startPlayer();">gioca</button>
+        `;
+    
 }

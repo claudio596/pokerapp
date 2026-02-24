@@ -220,6 +220,13 @@ socket.on('utente-disconnected', data => {
 
 if (li) li.remove();
   document.querySelector(".num-player .num").textContent = data.num;
+
+  if(data.num < 2){
+     document.querySelector(".game-options .option").style.display="none";
+            document.querySelector(".game-options .info").innerHTML=`
+            <p>in attesa di altri giocatori <strong class="point">.</strong><strong class="point">.</strong><strong class="point">.</strong></p>
+            `;
+  }
 })
 
 socket.on("disconnect", (reason) => {

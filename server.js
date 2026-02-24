@@ -65,17 +65,18 @@ socket.on("leave-table", ({ tableId, name }) => {
 
     table.players--;
 
-    io.to(user.id).emit("utente-disconnected", {
-      name: user.name,
-      num: table.players
-    });
+
 
     const a= table.players > 1 ? 0 : -1;
     if(a == -1){
       open_start = false;
     }
 
-    io.to(user.id).emit("player-pronti", a );
+      io.to(user.id).emit("utente-disconnected", {
+      name: user.name,
+      num: table.players
+    });
+    
 
     if (table.players <= 0) {
       tables = tables.filter(t => t.id !== user.id);
@@ -166,6 +167,7 @@ socket.on("player-pronti", ({num,tableId}) => {
 socket.on("remove-player-pronti", ({num,tableId}) => {
   num = Number(num) -1;
   io.to(tableId).emit("player-pronti", num);
+  socket.emit("remove-button-gioca");
 })
 
 socket.on("game-message", ({message,tableId}) =>{
