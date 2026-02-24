@@ -18,6 +18,15 @@
     padding: 10px;
     scrollbar-width: none;
 }
+#message-container div{
+    color:white;
+    font-size: medium;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    display: grid;
+    place-items: left;
+}
 
 .player{
     display: flex;

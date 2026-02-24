@@ -32,7 +32,7 @@ function appendPlayerList(name){
 messageForm.addEventListener('submit', e => {
     e.preventDefault();
     const message = messageInput.value;
-    appendMessage(`you: ${message}`);// il messaggio che invi vieni appeso anche alla propria chat
+    appendMessagetext("you", message);// il messaggio che invi vieni appeso anche alla propria chat
     const tableId = sessionStorage.getItem("table_id");
     socket.emit('table-message', {
         tableId,
@@ -43,10 +43,18 @@ messageForm.addEventListener('submit', e => {
 
 })
 
+
 function appendMessage(message){
     const messageElement = document.createElement('div');
-    messageElement.classList.add('message-content');
     messageElement.innerText = message;
+   messageContainer.appendChild(messageElement);
+}
+function appendMessagetext(name, message){
+    const messageElement = document.createElement('div');
+    messageElement.innerHtml = `
+    <p class="name">${name}</p>
+    <p class="message">${message}</p>
+    `;
    messageContainer.appendChild(messageElement);
 }
 
@@ -69,7 +77,7 @@ async function waitForServer(url, {
     if (!result.loading) {
        div.style.display = "none";
   bodyContent.style.display = "block";
-  document.body.style.backgroundColor = "green";
+  document.body.style.backgroundColor = "black";
       return true;
     }
 
@@ -179,7 +187,7 @@ socket.on("pong-test", () => {
 //appende il messaggio nella chat
 socket.on('table-message', data => {
      if (data.name === sessionStorage.getItem("user_name")) return;
-appendMessage(`${data.name}: ${data.message}`);
+appendMessagetext(data.name, data.message);
 })
 
 //user-connected

@@ -54,7 +54,8 @@ document.getElementById("create-table").addEventListener("click", () => {
     tableId
   });
 
-  console.log("Tavolo creato:", tableId);
+  
+  
 
 });
 
