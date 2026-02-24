@@ -21,9 +21,12 @@
             return;
         }
 div.textContent=`${num}`;
+        document.querySelector(".game-options .option").innerHTML=`
+        <button onclick="rimuoviPronto();">rimuovi gioca</button>
+        `;
 const total_player= document.querySelector(".num-player .num").textContent;
 if(total_player == num){
-    document.querySelector(".game-options .option").innerHtml="";
+    document.querySelector(".game-options .option").innerHTML="";
     document.querySelector(".game-options .info").innerHTML=`
     <div class="game-utils check"> check </div> <div class="game-utils call"> call </div>
      `;
@@ -37,13 +40,12 @@ if(total_player == num){
         tableId: sessionStorage.getItem("table_id")
     })
 }
+
+//fine player pronti
     });
 
     socket.on("game-message", message => {
-        const p = document.createElement("p");
-        p.textContent = message;
-        document.querySelector(".event-game").appendChild(p);
-
+        document.querySelector(".event-game").innerText = message;
     });
 
     socket.on("give-initial-card", card=>{
@@ -67,6 +69,16 @@ if(total_player == num){
     console.log(num);
     socket.emit("player-pronti", {
         num:num,
+        tableId: sessionStorage.getItem("table_id")
+    });
+}
+
+
+function rimuoviPronto(){
+     let num= document.querySelector(".pronti").textContent;
+    socket.emit("remove-player-pronti", {
+        num_prec:num,
+        num:-1,
         tableId: sessionStorage.getItem("table_id")
     });
 }

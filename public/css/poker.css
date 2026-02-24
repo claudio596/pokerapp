@@ -33,7 +33,7 @@
     border-radius: 5px;
     border: 1px solid grey;
     display: grid;
-    width: fit-content;
+    width: 90%;
     max-width: 100%;
   height: fit-content;
   color: white;
@@ -41,10 +41,8 @@
 
 #message-container .message-table .name{
     font-weight: bold;
-    font-size: 10px;
-    display: flex;
+    font-size: 8px;
     width: 100%;
-    text-align: left;
     justify-content: left;
     padding-left: 3px;
     padding-bottom: 2px;
@@ -53,10 +51,9 @@
 }
 
 #message-container .message-table .message{
-    display: flex;
-    justify-content: left;
+    text-align: left;
     padding-left: 4px;
-    font-size: 16px;
+    font-size: 14px;
      color:white;
     overflow-wrap: break-word; /* moderno */
     word-wrap: break-word;     /* compatibilità */
@@ -144,7 +141,7 @@
     display: grid;
     margin-left: 4px;
     width: fit-content;
-    height: fit-content;
+    height: 170px;
     background-color: white;
 }
 
@@ -161,7 +158,7 @@
     overflow: scroll;
     scrollbar-width: none;
     max-width: 150px;
-    max-height: 200px;
+    max-height: 120px;
 }
 .connection-info::-webkit-scrollbar{
     display: none;
@@ -309,10 +306,11 @@ font-size: smaller;
     color: gold;
     font-size: 30px;
     z-index: 9999;
-    animation: flash 2s ease-in-out;
-    place-items: center;
     height: fit-content;
     width: fit-content;
+}
+.event-game.active{
+    animation: flash 2s ease-in-out;
 }
 
 @keyframes flash{
@@ -323,7 +321,6 @@ font-size: smaller;
             transform: scale(1.2);
         }100%{
             opacity: 0;
-            display: none;
         }
     
     }

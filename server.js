@@ -163,6 +163,11 @@ socket.on("player-pronti", ({num,tableId}) => {
   io.to(tableId).emit("player-pronti", num);
 });
 
+socket.on("remove-player-pronti", ({num,tableId}) => {
+  num = Number(num) -1;
+  io.to(tableId).emit("player-pronti", num);
+})
+
 socket.on("game-message", ({message,tableId}) =>{
   if(message == "start" && init_game==false){
     init_game=true;
