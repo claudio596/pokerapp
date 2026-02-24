@@ -107,7 +107,13 @@
 
 .connection-info{
     border: 1px solid black;
-    height: fit-content;
+    overflow: scroll;
+    scrollbar-width: none;
+    max-width: 150px;
+    max-height: 200px;
+}
+.connection-info::-webkit-scrollbar{
+    display: none;
 }
 
 .connection-info li{
@@ -117,13 +123,6 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   font-size: 10px;
-  overflow: scroll;
-    scrollbar-width: none;
-    max-width: 150px;
-    max-height: 200px;
-}
-.connection-info::-webkit-scrollbar{
-    display: none;
 }
 
 .connection-menu i{

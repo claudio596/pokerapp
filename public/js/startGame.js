@@ -13,7 +13,7 @@
         li.textContent = `giocatori pronto: ${num}`;
         document.querySelector(".connection-info").appendChild(li);
         const div= document.querySelector(".pronti");
-        if(user_pronti == -1){
+        if(num == -1){
             document.querySelector(".game-options .option").style.display="none";
             document.querySelector(".game-options .info").innerHTML=`
             <p>in attesa di altri giocatori <strong class="point">.</strong><strong class="point">.</strong><strong class="point">.</strong></p>
