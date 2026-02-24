@@ -4,6 +4,7 @@ const client = supabase.createClient(
 );
 
 let socket;
+
 window.addEventListener('load', async() => {
    await waitForServer("https://pokerapp-k2qf.onrender.com/ping");
    socket = io("https://pokerapp-k2qf.onrender.com", {
@@ -46,11 +47,13 @@ messageForm.addEventListener('submit', e => {
 
 function appendMessage(message){
     const messageElement = document.createElement('div');
+    messageElement.classList.add('message-utils');
     messageElement.innerText = message;
    messageContainer.appendChild(messageElement);
 }
 function appendMessagetext(name, message){
     const messageElement = document.createElement('div');
+    messageElement.classList.add('message-table');
     messageElement.innerHtml = `
     <p class="name">${name}</p>
     <p class="message">${message}</p>
@@ -77,7 +80,7 @@ async function waitForServer(url, {
     if (!result.loading) {
        div.style.display = "none";
   bodyContent.style.display = "block";
-  document.body.style.backgroundColor = "black";
+  document.body.style.backgroundColor = "rgb(82, 79, 79)";
       return true;
     }
 

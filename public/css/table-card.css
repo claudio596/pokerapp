@@ -13,6 +13,7 @@
     display: grid;
     place-items: center;
     gap: 10px;
+    background-color: green;
 }
 
 .dealer i{
@@ -57,6 +58,7 @@
     gap: 10px;
     bottom: 10px;
     right: 10px;
+    color: black;
 }
 .game-options .option{
     display: none;
