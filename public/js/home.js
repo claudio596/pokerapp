@@ -55,8 +55,10 @@ document.getElementById("create-table").addEventListener("click", () => {
   });
 
   
+  const connect = document.querySelector(".connect");
+  document.querySelector(".body").style.display="none";
+  connect.style.display = "block";
   
-
 });
 
 
