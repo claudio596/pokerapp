@@ -6,7 +6,9 @@
     })
 
     socket.on("player-pronti", user_pronti =>{
-        console.log(user_pronti);
+        const li = document.createElement("li");
+        li.textContent = `giocatori pronto: ${user_pronti}`;
+        document.querySelector(".connection-info").appendChild(li);
         const div= document.querySelector(".pronti");
         if(user_pronti == -1){
             document.querySelector(".game-options .option").style.display="none";

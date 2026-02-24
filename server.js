@@ -153,8 +153,7 @@ socket.on("check-table", (tableId, callback) => {
 //game events
 
 socket.on("player-pronti", (num,tableId) => {
-  let user_pronti = Number(num);
-  user_pronti++;
+  let user_pronti = Number(num) +1;
   io.to(tableId).emit("player-pronti", user_pronti);
 });
 
