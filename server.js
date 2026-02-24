@@ -19,7 +19,10 @@ app.get("/ping", (req, res) => {
 
 let tables = [];
 let users = [];
+let tables_inGame=[];
  let open_start = false;
+ let init_game=false;
+ let card=["1F","2F","3F","4F","5F","6F"];
 
 io.on("connection", (socket) => {
   console.log("Nuovo client:", socket.id);
@@ -157,6 +160,38 @@ socket.on("player-pronti", ({num,tableId}) => {
   io.to(tableId).emit("player-pronti", num);
 });
 
+socket.on("game-message", ({message,tableId}) =>{
+  if(message == "start" && init_game==false){
+    init_game=true;
+    const player= users.filter(u => u.id === tableId).map(u => u.name);
+    const num_player= player.length;
+    tables_inGame.push({player:player, tableId:tableId,
+      num:num_player,first:0});
+  }
+  io.to(tableId).emit("game-message", message);
+})
+
+socket.on("give-initial-card", tableId =>{
+  const table= tables_inGame.find(t => t.tableId === tableId);
+  let k;let i;
+  //suhffle card
+  const deck = shuffle(card);
+for( k=1; k<=2; k++){
+    for( i=0; i<table.player; i++){
+      const player = table.player[i];
+      const id_player= users.find(u => u.name === player).socketId;
+      const card = deck[0];
+      socket.to(id_player).emit("give-initial-card", {
+        card:card,
+        num_card: k
+      });
+       deck.remove(card);
+  }
+}
+io.to(tableId).emit("give-scarto");
+
+})
+
 });
 
 // PORTA CORRETTA PER RENDER
@@ -165,3 +200,11 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log("Server avviato su porta", PORT);
 });
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // swap
+  }
+  return array;
+}
