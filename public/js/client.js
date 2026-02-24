@@ -54,7 +54,7 @@ function appendMessage(message){
 function appendMessagetext(name, message){
     const messageElement = document.createElement('div');
     messageElement.classList.add('message-table');
-    messageElement.innerHtml = `
+    messageElement.innerHTML = `
     <p class="name">${name}</p>
     <p class="message">${message}</p>
     `;
