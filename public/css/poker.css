@@ -34,7 +34,6 @@
     border: 1px solid grey;
     padding: 5px;
     display: grid;
-    place-items: left;
     width: 100%;
   height: fit-content;
   color: white;
