@@ -141,7 +141,8 @@
     display: grid;
     margin-left: 4px;
     width: fit-content;
-    height: 170px;
+    height: fit-content;
+    max-height: 170px;
     background-color: white;
 }
 
