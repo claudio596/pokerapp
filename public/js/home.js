@@ -72,7 +72,7 @@ div.innerHTML=`
   
 });
 
-document.querySelector(".createTable").addEventListener("click", () => {
+document.getElementById("createTable").addEventListener("click", () => {
     const tableId = Math.random().toString(36).substring(2, 8);
   sessionStorage.setItem("table_id", tableId);
   const selected = document.querySelector('input[name="smallBlind"]:checked');
