@@ -19,6 +19,12 @@ socket.on('player-list-complete', data =>{
     }
       document.querySelector(".num-player .num").textContent = data.num;
       document.querySelector(".reconnection").style.display="none";
+
+        const ul= document.querySelector(".imp-ul");
+   ul.querySelector(".cashEntry strong").textContent = `${data.cashEntry}`;
+   ul.querySelector(".smallBlind strong").textContent = `${data.smallBlind}`;
+   ul.querySelector(".fichesValue strong").textContent =`${data.fichesValue}`;
+   ul.querySelector(".fichesNumber strong").textContent = `${data.fichesNumber}`;
 })
 
 }

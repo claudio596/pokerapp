@@ -132,11 +132,7 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   // Notifica agli altri
   socket.to(tableId).emit("user-connected", {
     name: userName,
-    num: num_player,
-    cashEntry: table.cashEntry,
-    smallBlind: table.smallBlind,
-    numFiches: table.numFiches,
-    valFiches: table.valFiches
+    num: num_player
   });
 
   // Lista utenti già presenti
@@ -147,7 +143,11 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   // Invia SOLO al nuovo utente
   socket.emit("player-list-complete", {
     userPast: userPast,
-    num: num_player
+    num: num_player,
+     cashEntry: table.cashEntry,
+    smallBlind: table.smallBlind,
+    numFiches: table.numFiches,
+    valFiches: table.valFiches
   });
 
   socket.join(tableId);
