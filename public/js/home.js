@@ -65,7 +65,7 @@ div.innerHTML=`
 <label for="yes">si</label>
 <input type="radio" id="yes" name="smallBlind" value="yes">
 
-<button id="createTable" onclick="createTable()" type="button">crea tavolo</button>
+<button id="createTable" onclick="createTable();" type="button">crea tavolo</button>
 </form>
 `;
   
