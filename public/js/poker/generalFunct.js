@@ -61,11 +61,16 @@ const div = document.querySelector(".player-list");
 const p=document.querySelector(".imp-table .flex p");
 let open_impTable = false;
 p.addEventListener("click", () => {
+  const ul=document.querySelector(".imp-ul");
+  const top= document.querySelector(".menu").getBoundingClientRect().height;
+  const left= document.querySelector(".imp-table").getBoundingClientRect().left;
   if(open_impTable == false){
-    document.querySelector(".imp-table ul").style.display = "block";
+    ul.style.display = "block";
     p.style.transform = "rotate(90deg)";
+    ul.style.top = `${top}px`;
+    ul.style.left = `${left}px`;
   }else{
-      document.querySelector(".imp-table ul").style.display = "none";
+      ul.style.display = "none";
     p.style.transform = "rotate(-90deg)";
   }
 
