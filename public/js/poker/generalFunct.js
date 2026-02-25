@@ -56,3 +56,18 @@ const div = document.querySelector(".player-list");
 
   player_list_open = !player_list_open;
 })
+
+//imp-table
+const p=document.querySelector(".imp-table .flex p");
+let open_impTable = false;
+p.addEventListener("click", () => {
+  if(open_impTable == false){
+    document.querySelector(".imp-table ul").style.display = "block";
+    p.style.transform = "rotate(90deg)";
+  }else{
+      document.querySelector(".imp-table ul").style.display = "none";
+    p.style.transform = "rotate(-90deg)";
+  }
+
+  open_impTable = !open_impTable;
+})
