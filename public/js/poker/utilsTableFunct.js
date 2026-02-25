@@ -23,8 +23,8 @@ socket.on('player-list-complete', data =>{
         const ul= document.querySelector(".imp-ul");
    ul.querySelector(".cashEntry strong").textContent = `${data.cashEntry}`;
    ul.querySelector(".smallBlind strong").textContent = `${data.smallBlind}`;
-   ul.querySelector(".fichesValue strong").textContent =`${data.fichesValue}`;
-   ul.querySelector(".fichesNumber strong").textContent = `${data.fichesNumber}`;
+   ul.querySelector(".fichesValue strong").textContent =`${data.valFiches}`;
+   ul.querySelector(".fichesNumber strong").textContent = `${data.numFiches}`;
 })
 
 }
