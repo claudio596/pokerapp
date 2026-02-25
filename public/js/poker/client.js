@@ -10,8 +10,9 @@ window.addEventListener('load', async() => {
    socket = io("https://pokerapp-k2qf.onrender.com", {
     transports: ["websocket"]
    });
-  setupSocketEvents(); // ora i listener vengono registrati
+  setupCoonnect(); // ora i listener vengono registrati
   setupStartGameEvents();
+  utilsTableFunct();
 
 });
 
@@ -152,96 +153,6 @@ appendMessage(`you joined`);
 }
 
 
-
-function setupSocketEvents(){
-
-    //controllo connessione
-socket.on("connect", () => {
-  const li = document.createElement("li");
-  li.textContent = "Connesso al server! ID: " + socket.id;
-  document.querySelector(".connection-info").appendChild(li);
-  socket.emit("ping-test");
-    loadUser();
-  const tableid = sessionStorage.getItem("table_id");
-document.getElementById("tableid").textContent = tableid;
-  console.log(socket.io.uri);
-});
-
-socket.on("table-not-found", Id =>{
-  const li = document.createElement("li");
-  li.textContent = `Tavolo: ${Id} inesistente`;
-  document.querySelector(".connection-info").appendChild(li);
-})
-  socket.on("connect_error", (err) => {
-  console.error("Errore di connessione:", err.message);
-  const li = document.createElement("li");
-  li.textContent = "Errore di connessione: " + err.message;
-  document.querySelector(".connection-info").appendChild(li);
-});
-
-socket.on("pong-test", () => {
-  console.log("PONG dal server");
-   const li = document.createElement("li");
-  li.textContent = "PONG dal server";
-  document.querySelector(".connection-info").appendChild(li);
-});
-
-
-//appende il messaggio nella chat
-socket.on('table-message', data => {
-     if (data.name === sessionStorage.getItem("user_name")) return;
-appendMessagetext(data.name, data.message);
-})
-
-//user-connected
-socket.on('user-connected', data => {
-    appendPlayerList(data.name);
-  document.querySelector(".num-player .num").textContent = data.num;
-  
-  /*
-       if (data.name === sessionStorage.getItem("user_name")) return;
-    */
-   appendMessage(`${data.name} joined`);
-})
-
-socket.on('player-list-complete', data =>{
-  document.querySelector(".player-list").innerHTML="";
-    for(let i = 0; i < data.userPast.length; i++){
-        appendPlayerList(data.userPast[i]);
-    }
-      document.querySelector(".num-player .num").textContent = data.num;
-      document.querySelector(".reconnection").style.display="none";
-})
-
-socket.on('utente-disconnected', data => {
-    appendMessage(`${data.name} left`);
-    const li = [...document.querySelectorAll(".player-list li")]
-  .find(li => li.querySelector("p")?.textContent === data.name);
-
-if (li) li.remove();
-  document.querySelector(".num-player .num").textContent = data.num;
-
-  if(data.num < 2){
-     document.querySelector(".game-options .option").style.display="none";
-            document.querySelector(".game-options .info").innerHTML=`
-            <p>in attesa di altri giocatori <strong class="point">.</strong><strong class="point">.</strong><strong class="point">.</strong></p>
-            `;
-  }
-})
-
-socket.on("disconnect", (reason) => {
-  console.log("Disconnesso:", reason);
-
-  if (reason !== "io client disconnect") {
-    showReconnectingOverlay(reason);
-  }
-
-});
-
-}
-
-
-
 function showReconnectingOverlay(reason){
   const reconnect= document.querySelector(".reconnection");
   document.querySelector(".body").style.display="none";
@@ -252,7 +163,6 @@ function showReconnectingOverlay(reason){
 
   attemptReconnect();
 }
-
 
 function attemptReconnect(){
   const user_uid=sessionStorage.getItem("user_uid");

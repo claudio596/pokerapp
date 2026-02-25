@@ -1,5 +1,5 @@
 
-//funzioni della pagina(non client)
+//funzioni generali della pagina
 
 document.querySelector(".exit").addEventListener("click", () => {
   document.querySelector(".body").classList.toggle("dimmed");

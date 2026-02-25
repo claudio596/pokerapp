@@ -36,15 +36,16 @@ if(total_player == num){
     });
 
 
-    socket.on("remove-button-gioca", ()=>{
-        document.querySelector(".game-options .option").innerHTML=`
-        <button onclick="rimuoviPronto();">rimuovi gioca</button>
-        `;
+    socket.on("remove-player-pronti", num=>{
+      const div= document.querySelector(".pronti");
+        div.textContent=`${num}`;
     })
+
 
     socket.on("game-message", message => {
         document.querySelector(".event-game").innerText = message;
     });
+
 
     socket.on("give-initial-card", card=>{
         const li = document.createElement("li");
@@ -54,6 +55,7 @@ if(total_player == num){
         div.style.backgroundImage=`url(image/${card.card}.jpg)`;
     })
 
+    
     socket.on("give-scarto", ()=>{
         const div= document.querySelector(".scarto");
         div.style.backgroundImage="url(image/scarto.jpg)";
@@ -69,6 +71,9 @@ if(total_player == num){
         num:num,
         tableId: sessionStorage.getItem("table_id")
     });
+      document.querySelector(".game-options .option").innerHTML=`
+        <button onclick="rimuoviPronto();">rimuovi gioca</button>
+        `;
 }
 
 

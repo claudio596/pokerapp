@@ -22,6 +22,15 @@
         <div class="exit">
             <i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
         </div>
+        <div class="imp_table">
+          <div class="flex"><h5>table rules</h5><p>></p></div>
+          <ul>
+            <li class="cashEntry">cash Entry: <strong></strong></li>
+            <li class="smallBlind">small Blind: <strong></strong></li>
+            <li class="fichesValue">fiches value: <strong></strong></li>
+            <li class="fichesNumber">fiches number: <strong></strong></li>
+          </ul>
+        </div>
         <h4>tavolo: <strong id="tableid"></strong></h4>
         <div class="num-player">
             <p class="num">0</p>
@@ -119,9 +128,9 @@
 
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/client.js"></script>
-<script src="js/socket.js"></script>
-<script src="js/poker.js"></script>
-<script src="js/startGame.js"></script>
+<script defer src="js/poker/generalFunct.js"></script>
+<script defer src="js/poker/startGame.js"></script>
+<script defer src="js/poker/utilsTableFunct.js"></script>
+<script defer src="js/poker/client.js"></script>
 </body>
 </html>

@@ -81,3 +81,8 @@ all'exit
   text-align: center;
   display: none;
 }
+
+.flex{
+    display: flex;
+    gap: 2px;
+}

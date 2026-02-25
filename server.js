@@ -93,8 +93,13 @@ socket.on("leave-table", ({ tableId, name }) => {
     io.to(tableId).emit("table-message", { name, message });
   });
 
-  socket.on("createTable", ({ tableId }) => {
-      tables.push({ players: 0, id: tableId });
+  socket.on("createTable", ({ 
+    tableId,smallBlind,numFiches,valFiches,cashEntry }) => {
+
+      tables.push({ players: 0, id: tableId, 
+        smallBlind: smallBlind, numFiches: numFiches, 
+        valFiches: valFiches, cashEntry: cashEntry
+      });
 
     socket.join(tableId);
     socket.emit("table-created", tableId);
@@ -127,7 +132,11 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   // Notifica agli altri
   socket.to(tableId).emit("user-connected", {
     name: userName,
-    num: num_player
+    num: num_player,
+    cashEntry: table.cashEntry,
+    smallBlind: table.smallBlind,
+    numFiches: table.numFiches,
+    valFiches: table.valFiches
   });
 
   // Lista utenti già presenti
@@ -165,7 +174,6 @@ socket.on("player-pronti", ({num,tableId}) => {
 socket.on("remove-player-pronti", ({num,tableId}) => {
   num = Number(num) -1;
   io.to(tableId).emit("player-pronti", num);
-  socket.emit("remove-button-gioca");
 })
 
 socket.on("game-message", ({message,tableId}) =>{
