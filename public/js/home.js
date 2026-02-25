@@ -48,15 +48,15 @@ const div = document.querySelector(".gioca");
 div.innerHTML=`
 <form id="imp-table">
 <label for="numFiches">numero di fiches:</label>
-<input type="number" id="numFiches" required>
+<input type="number" id="numFiches" value="40" required>
 <label for="valFiches">valore fiches:</label>
 <div class="flex"> 
-<input type="number" id="valFiches" required>
+<input type="number" id="valFiches" value="0.20" required>
 <p>€<p>
 </div>
 <label for="cashEntry">cash entry:</label>
 <div class="flex">
-<input type="number" id="cashEntry" required>
+<input type="number" id="cashEntry" value="5" required>
 <p>€<p>
 </div>
 <label for="smallBlind">puntata minima:</label>
@@ -65,14 +65,14 @@ div.innerHTML=`
 <label for="yes">si</label>
 <input type="radio" id="yes" name="smallBlind" value="yes">
 
-<button id="createTable" type="button">crea tavolo</button>
+<button id="createTable" onclick="createTable()" type="button">crea tavolo</button>
 </form>
 `;
   
   
 });
 
-document.getElementById("createTable").addEventListener("click", () => {
+function createTable() {
     const tableId = Math.random().toString(36).substring(2, 8);
   sessionStorage.setItem("table_id", tableId);
   const selected = document.querySelector('input[name="smallBlind"]:checked');
@@ -100,7 +100,7 @@ document.getElementById("createTable").addEventListener("click", () => {
   const connect = document.querySelector(".connect");
   document.querySelector(".body").style.display="none";
   connect.style.display = "block";
-})
+}
 
 
 socket.on("table-created", (id) => {
