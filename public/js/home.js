@@ -46,7 +46,7 @@ document.getElementById("imp-create-table").addEventListener("click", () => {
 
 const div = document.querySelector(".gioca");
 div.innerHTML=`
-<form id="imp-table">
+<div id="imp-table">
 <label for="numFiches">numero di fiches:</label>
 <input type="number" id="numFiches" value="40" required>
 <label for="valFiches">valore fiches:</label>
@@ -66,13 +66,13 @@ div.innerHTML=`
 <input type="radio" id="yes" name="smallBlind" value="yes">
 
 <button id="createTable" onclick="createTable();" type="button">crea tavolo</button>
-</form>
+</div>
 `;
   
   
 });
 
-function createTable() {
+function createTable(){
     const tableId = Math.random().toString(36).substring(2, 8);
   sessionStorage.setItem("table_id", tableId);
   const selected = document.querySelector('input[name="smallBlind"]:checked');
