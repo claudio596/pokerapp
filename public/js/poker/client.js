@@ -10,7 +10,7 @@ window.addEventListener('load', async() => {
    socket = io("https://pokerapp-k2qf.onrender.com", {
     transports: ["websocket"]
    });
-  setupCoonnect(); // ora i listener vengono registrati
+  setupConnect(); // ora i listener vengono registrati
   setupStartGameEvents();
   utilsTableFunct();
 
