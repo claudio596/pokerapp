@@ -40,7 +40,7 @@ document.querySelector(".no-exit").addEventListener("click", () => {
 
 
 // Quando clicchi "crea un tavolo"
-document.getElementById(".imp-create-table").addEventListener("click", () => {
+document.getElementById("imp-create-table").addEventListener("click", () => {
   
   // Genera ID tavolo unico
 
