@@ -66,12 +66,12 @@ p.addEventListener("click", () => {
   const left= document.querySelector(".imp-table").getBoundingClientRect().left;
   if(open_impTable == false){
     ul.style.display = "block";
-    p.style.transform = "rotate(90deg)";
+    p.style.transform = "rotate(-90deg)";
     ul.style.top = `${top}px`;
     ul.style.left = `${left}px`;
   }else{
       ul.style.display = "none";
-    p.style.transform = "rotate(-90deg)";
+    p.style.transform = "rotate(90deg)";
   }
 
   open_impTable = !open_impTable;

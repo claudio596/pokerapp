@@ -29,10 +29,10 @@ socket.on('user-connected', data => {
   /* if (data.name === sessionStorage.getItem("user_name")) return; */
    appendMessage(`${data.name} joined`);
    const ul= document.querySelector(".imp-ul");
-   ul.querySelector(".cashEntry strong").textContent = data.cashEntry;
-   ul.querySelector(".smallBlind strong").textContent = data.smallBlind;
-   ul.querySelector(".fichesValue strong").textContent = data.fichesValue;
-   ul.querySelector(".fichesNumber strong").textContent = data.fichesNumber;
+   ul.querySelector(".cashEntry strong").textContent = `${data.cashEntry}`;
+   ul.querySelector(".smallBlind strong").textContent = `${data.smallBlind}`;
+   ul.querySelector(".fichesValue strong").textContent =`${data.fichesValue}`;
+   ul.querySelector(".fichesNumber strong").textContent = `${data.fichesNumber}`;
 })
 
 
