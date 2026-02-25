@@ -16,6 +16,7 @@ socket.on('player-list-complete', data =>{
   document.querySelector(".player-list").innerHTML="";
     for(let i = 0; i < data.userPast.length; i++){
         appendPlayerList(data.userPast[i]);
+           playerTableIcon(data.name);
     }
       document.querySelector(".num-player .num").textContent = data.num;
       document.querySelector(".reconnection").style.display="none";

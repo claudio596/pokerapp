@@ -1,0 +1,7 @@
+
+.player-table-icon{
+    position: absolute;
+    display: grid;
+    place-items: center;
+    gap: 5px;
+}

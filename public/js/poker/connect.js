@@ -28,6 +28,7 @@ socket.on('user-connected', data => {
   document.querySelector(".num-player .num").textContent = data.num;
   /* if (data.name === sessionStorage.getItem("user_name")) return; */
    appendMessage(`${data.name} joined`);
+   playerTableIcon(data.name);
 })
 
 
@@ -48,6 +49,8 @@ if (li) li.remove();
             <p>in attesa di altri giocatori <strong class="point">.</strong><strong class="point">.</strong><strong class="point">.</strong></p>
             `;
   }
+
+  removeIconProfile(data.name);
 })
 
 
@@ -66,4 +69,68 @@ socket.on("pong-test", () => {
   li.textContent = "PONG dal server";
   document.querySelector(".connection-info").appendChild(li);
 });
+}
+
+let tableInfo={
+  first=0,
+  num=0,
+  free=0,
+  size=8
+}
+const tablePos=[
+  {top:"30px", right:"-5px",pos:"t-r",next:1},{bottom:"30px", right:"-5px", pos:"b-r",next:2},
+  {bottom:"-5px", right:"20px", pos:"b-r", next:3},{bottom:"-5px", right:"5px", pos:"b-r", next:4},
+  {bottom:"-5px", left:"5px", pos:"b-l", next:5},{bottom:"-5px", left:"20px", pos:"b-l", next:6},
+  {bottom:"30px", left:"-5px", pos:"b-l",next:7},{top:"30px", left:"-5px", pos:"t-l", next:8}
+]
+
+
+function playerTableIcon(name){
+  const table= document.querySelector(".table");
+  const div = createElement("div");
+  div.classList.add("player-table-icon");
+  div.id = name;
+  div.dataset.itemid=tableInfo.num;
+  if(name===sessionStorage.getItem("user_name")){
+   div.innerHTML= `
+      <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
+      <p>You</p>
+  `;
+  }else{
+    div.innerHTML= `
+      <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
+      <p>${name}</p>
+      <p class="cash">fiches: <strong></strong></p>
+      <div class="time"><input type="range"><p><p></div>
+  `;
+  }
+  
+const style= tablePos[num];
+switch(style.pos){
+  case "t-r":
+    div.style.top=style.top;
+    div.style.right=style.right;
+    break;
+  case "b-r":
+    div.style.bottom=style.bottom;
+    div.style.right=style.right;
+    break;
+  case "b-l":
+    div.style.bottom=style.bottom;
+    div.style.left=style.left;
+    break;
+  case "t-l":
+    div.style.top=style.top;
+    div.style.left=style.left;
+    break;
+}
+tableInfo.num++;
+  table.appendChild(div);
+}
+
+function removeIconProfile(name){
+  const div = document.getElementById(name);
+  div.remove();
+  for(let i = num; )
+  num--;
 }
