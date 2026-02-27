@@ -16,12 +16,13 @@
 }
 .gioca{
     display: grid;
+    gap: 5px;
     place-items: center;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 5px 5px 10px black;
-    height: 200px;
-    width: 200px;
+    height: fit-content;
+    width: fit-content;
     border: 1px solid black;
     position: absolute;
     left: 50%;

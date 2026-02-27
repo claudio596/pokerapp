@@ -182,14 +182,16 @@ socket.on("check-table", (tableId, callback) => {
 
 //game events
 
-socket.on("player-pronti", ({num,tableId}) => {
+socket.on("player-pronti", ({num,tableId,name}) => {
   num = Number(num) +1;
   io.to(tableId).emit("player-pronti", num);
+  socket.to(tableId).emit("player-pronti-visual", name);
 });
 
-socket.on("remove-player-pronti", ({num,tableId}) => {
+socket.on("remove-player-pronti", ({num,tableId,name}) => {
   num = Number(num) -1;
   io.to(tableId).emit("player-pronti", num);
+  socket.to(tableId).emit("remove-player-pronti-visual",name);
 })
 
 socket.on("game-message", ({message,tableId}) =>{

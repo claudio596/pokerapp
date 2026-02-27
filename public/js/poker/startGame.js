@@ -36,11 +36,21 @@ if(total_player == num){
     });
 
 
-    socket.on("remove-player-pronti", num=>{
-      const div= document.querySelector(".pronti");
-        div.textContent=`${num}`;
+    socket.on("player-pronti-visual",name => {
+        const div = document.getElementById(name);
+        const p=div.querySelector(".event");
+        p.style.display="block";
+        p.innerText = "pronto";
+        p.style.backgroundColor="blue";
     })
 
+    socket.on("remove-player-pronti-visual",name => {
+        const div = document.getElementById(name);
+        const p=div.querySelector(".event");
+        p.innerText = "";
+        p.style.backgroundColor="";
+        p.style.display="none";
+    })
 
     socket.on("game-message", message => {
         document.querySelector(".event-game").innerText = message;
@@ -69,20 +79,22 @@ if(total_player == num){
     console.log(num);
     socket.emit("player-pronti", {
         num:num,
-        tableId: sessionStorage.getItem("table_id")
+        tableId: sessionStorage.getItem("table_id"),
+        name: sessionStorage.getItem("user_name")
     });
       document.querySelector(".game-options .option").innerHTML=`
         <button onclick="rimuoviPronto();">rimuovi gioca</button>
         `;
+
 }
 
 
 function rimuoviPronto(){
      let num= document.querySelector(".pronti").textContent;
     socket.emit("remove-player-pronti", {
-        num_prec:num,
-        num:-1,
-        tableId: sessionStorage.getItem("table_id")
+        num:num,
+        tableId: sessionStorage.getItem("table_id"),
+        name: sessionStorage.getItem("user_name")
     });
 
     document.querySelector(".game-options .option").innerHTML=`

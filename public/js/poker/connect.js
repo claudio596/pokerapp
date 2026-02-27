@@ -54,7 +54,13 @@ if (li) li.remove();
             document.querySelector(".game-options .info").innerHTML=`
             <p>in attesa di altri giocatori <strong class="point">.</strong><strong class="point">.</strong><strong class="point">.</strong></p>
             `;
+  }else{
+      const attual_Num= document.querySelector(".pronti").textContent;
+      const num= Number(attual_Num)-1;
+      const div= document.querySelector(".pronti");
+        div.textContent=`${num}`;
   }
+
 
   removeIconProfile(data.name,data.tableId);
 })
