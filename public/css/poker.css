@@ -31,7 +31,7 @@
 }
 .close-chat i{
     background-color: red;
-    padding: 2px;
+    padding: 5px;
     border-radius: 6px;
 }
 .close-chat{
@@ -68,7 +68,7 @@
     background-color: rgba(196, 196, 196, 0.185);
     transition: .1s ease-in-out;
     animation: openChat .1s ease-in-out;
-    max-width: 170px;
+    max-width: 200px;
 }
 
 @keyframes openChat{
