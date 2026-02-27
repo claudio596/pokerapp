@@ -141,12 +141,7 @@ all'exit
     border: 1px solid black;
     outline: none;
 }
-.input-box .flex{
-    display: flex;
-    gap: 0px;
-    align-items: baseline;
-    justify-content: center;
-}
+
 
 .input-box{
     position: relative;
@@ -161,9 +156,7 @@ all'exit
 }
 
 .input-box input:focus+label,
-.input-box input:input:not(:placeholder-shown)+label,
-.input-box .flex input:focus+label,
-.input-box .flex input:not(:placeholder-shown)+label{
+.input-box input:not(:placeholder-shown) + label{
     top: -5px;
     color: white;
     font-size: 9px;

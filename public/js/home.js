@@ -59,11 +59,8 @@ div.innerHTML=`
 <label for="numFiches">numero di fiches</label>
 </div>
 <div class="input-box">
-<div class="flex"> 
 <input type="number" id="valFiches" value="0.20" step="0.10" required>
-<p>€<p>
-</div>
-<label for="valFiches">valore fiches</label>
+<label for="valFiches">valore fiches €</label>
 </div>
 <label for="smallBlind">puntata minima:</label>
 <div class="radio-button">
