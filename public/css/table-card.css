@@ -25,7 +25,7 @@
     display: grid;
     gap: 10px;
     place-items: center;
-  grid-template: repeat(2, 1fr) / repeat(3, 1fr); /*riglia 2 X 3*/
+  grid-template: repeat(2, 1fr) / repeat(3, 1fr); /*grilia 2 X 3*/
 }
 .card .table-card{
     width: 50px;

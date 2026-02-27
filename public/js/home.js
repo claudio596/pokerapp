@@ -61,15 +61,17 @@ div.innerHTML=`
 <div class="input-box">
 <label for="valFiches">valore fiches:</label>
 <div class="flex"> 
-<input type="number" id="valFiches" value="0.20" required>
+<input type="number" id="valFiches" value="0.20" step="0.10" required>
 <p>€<p>
 </div>
 </div>
 <label for="smallBlind">puntata minima:</label>
+<div class="radio-button">
 <input type="radio" id="none" name="smallBlind" value="no" checked>
 <label for="none">no</label>
 <input type="radio" id="yes" name="smallBlind" value="yes">
 <label for="yes">si</label>
+</div>
 
 <button id="createTable" onclick="createTable();" type="button">crea tavolo</button>
 </div>

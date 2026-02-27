@@ -134,8 +134,8 @@ all'exit
 
 .input-box input,
 .input-box .flex input{
-    width: 230px;
-    padding: 17px 13px;
+    width: 150px;
+    padding: 12px 8px;
     border-radius: 8px;
     border: 1px solid black;
     outline: none;
@@ -143,7 +143,8 @@ all'exit
 .input-box .flex{
     display: flex;
     gap: 0px;
-    justify-content: baseline;
+    align-items: baseline;
+    justify-content: center;
 }
 
 .input-box{
@@ -152,8 +153,8 @@ all'exit
 
 .input-box label{
     position: absolute;
-    top: 15px;
-    left: 13px;
+    top: 10px;
+    left: 8px;
     color: black;
     transition: .3s;
 }
@@ -161,12 +162,20 @@ all'exit
 .input-box input:focus+label,
 .input-box input:valid+label,
 .input-box .flex input:focus+label,
-.input-box .flex input:valid+label{
-    top: -9px;
+.input-box .flex input:not(:placeholder-shown)+label{
+    top: -5px;
     color: white;
-    font-size: 13px;
+    font-size: 9px;
     color: white;
     background-color: black;
-    padding: 2px 7px;
+    padding: 2px 4px;
     border-radius: 12px;
+}
+
+.radio-button{
+    display: grid;
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr);/*griglia 2 X 2*/
+    row-gap: 5px;
+    column-gap: 5px;
+    place-items: center;
 }
