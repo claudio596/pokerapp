@@ -3,6 +3,22 @@
 }
 
 /*chat animation*/
+#send-container input{
+    width: 100px;
+}
+
+#send-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+}
+
+#send-container button{
+ background-color: rgba(0, 0, 0);
+  border: 1px solid white; 
+
+}
 .open-chat{
     display: block;
     position: absolute;
@@ -29,11 +45,7 @@
 .open-chat.hidden{
     display: none;
 }
-.close-chat i{
-    background-color: red;
-    padding: 5px;
-    border-radius: 6px;
-}
+
 .close-chat{
     justify-content: right;
     align-items: center;
@@ -43,6 +55,7 @@
     height: fit-content;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    padding: 7px 0px;
 }
 
 .allmessage.hidden{
@@ -68,7 +81,7 @@
     background-color: rgba(196, 196, 196, 0.185);
     transition: .1s ease-in-out;
     animation: openChat .1s ease-in-out;
-    max-width: 200px;
+    max-width: 250px;
 }
 
 @keyframes openChat{
