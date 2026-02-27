@@ -54,23 +54,22 @@ document.getElementById("imp-create-table").addEventListener("click", () => {
 const div = document.querySelector(".gioca");
 div.innerHTML=`
 <div id="imp-table">
+<div class="input-box">
 <label for="numFiches">numero di fiches:</label>
 <input type="number" id="numFiches" value="40" required>
+</div>
+<div class="input-box">
 <label for="valFiches">valore fiches:</label>
 <div class="flex"> 
 <input type="number" id="valFiches" value="0.20" required>
 <p>€<p>
 </div>
-<label for="cashEntry">cash entry:</label>
-<div class="flex">
-<input type="number" id="cashEntry" value="5" required>
-<p>€<p>
 </div>
 <label for="smallBlind">puntata minima:</label>
-<label for="none">no</label>
 <input type="radio" id="none" name="smallBlind" value="no" checked>
-<label for="yes">si</label>
+<label for="none">no</label>
 <input type="radio" id="yes" name="smallBlind" value="yes">
+<label for="yes">si</label>
 
 <button id="createTable" onclick="createTable();" type="button">crea tavolo</button>
 </div>
@@ -85,7 +84,7 @@ function createTable(){
   const selected = document.querySelector('input[name="smallBlind"]:checked');
   const numFiches = document.getElementById("numFiches").value;
   const valFiches = document.getElementById("valFiches").value;
-  const cashEntry = document.getElementById("cashEntry").value;
+ const cashEntry= (Number(numFiches))*(Number(valFiches));
   let smallBlind;
     if (!selected) {
         console.log("Nessuna scelta selezionata");

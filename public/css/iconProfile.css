@@ -5,3 +5,7 @@
     place-items: center;
     gap: 5px;
 }
+
+.player-table-icon .time{
+    display: none;
+}

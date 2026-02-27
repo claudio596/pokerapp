@@ -26,6 +26,8 @@ socket.on("connect_error", (err) => {
 socket.on('user-connected', data => {
     appendPlayerList(data.name);
   document.querySelector(".num-player .num").textContent = data.num;
+  const fiches= document.querySelector(".fichesNumber strong").textContent;
+  document.querySelector(".attual-cash p strong").textContent = `${fiches}`;
   /* if (data.name === sessionStorage.getItem("user_name")) return; */
    appendMessage(`${data.name} joined`);
    playerTableIcon(data.name, data.tableId);
@@ -91,23 +93,25 @@ const tablePos=[
 
 
 function playerTableIcon(name,tableId){
+  const num_fiches= document.querySelector(".fichesNumber strong").textContent;
   const table= document.querySelector(".table");
   const div = document.createElement("div");
-  div.classList.add("player-table-icon");
   div.id = name;
   div.dataset.itemid=tableInfo.free;
-  if(name===sessionStorage.getItem("user_name")){
+  if(name==sessionStorage.getItem("user_name")){
    div.innerHTML= `
       <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
       <p>You</p>
   `;
+  div.classList.add("player-table-icon-self");
   }else{
     div.innerHTML= `
       <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
       <p>${name}</p>
-      <p class="cash">fiches: <strong></strong></p>
+      <p class="cash">fiches: <strong>${num_fiches}</strong></p>
       <div class="time"><input type="range"><p><p></div>
   `;
+  div.classList.add("player-table-icon");
   }
 const style= tablePos[tableInfo.free];
 switch(style.pos){
