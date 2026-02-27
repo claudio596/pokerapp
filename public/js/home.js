@@ -54,6 +54,7 @@ document.getElementById("imp-create-table").addEventListener("click", () => {
 const div = document.querySelector(".gioca");
 div.innerHTML=`
 <div id="imp-table">
+<h4>Table rules</h4>
 <div class="input-box">
 <input type="number" id="numFiches" value="40" required>
 <label for="numFiches">numero di fiches</label>
