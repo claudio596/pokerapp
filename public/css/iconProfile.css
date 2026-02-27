@@ -1,3 +1,7 @@
+.dealer i{
+    position: absolute;
+    top: -5px;
+}
 
 .player-table-icon{
     position: absolute;
@@ -6,6 +10,25 @@
     gap: 5px;
 }
 
+.player-table-icon-self{
+    position: absolute;
+    display: grid;
+    place-items: center;
+    gap: 5px;
+}
+
 .player-table-icon .time{
     display: none;
+}
+
+.player-table-icon p,
+.player-table-icon-self p,
+.dealer p{
+    border: 1px solid black;
+    position: absolute;
+    top: -9px;
+    left: 5px;
+    background-color: white;
+    padding: 2px;
+    border-radius: 5px;
 }

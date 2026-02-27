@@ -26,8 +26,6 @@ socket.on("connect_error", (err) => {
 socket.on('user-connected', data => {
     appendPlayerList(data.name);
   document.querySelector(".num-player .num").textContent = data.num;
-  const fiches= document.querySelector(".fichesNumber strong").textContent;
-  document.querySelector(".attual-cash p strong").textContent = `${fiches}`;
   /* if (data.name === sessionStorage.getItem("user_name")) return; */
    appendMessage(`${data.name} joined`);
    playerTableIcon(data.name, data.tableId);
@@ -100,8 +98,8 @@ function playerTableIcon(name,tableId){
   div.dataset.itemid=tableInfo.free;
   if(name==sessionStorage.getItem("user_name")){
    div.innerHTML= `
-      <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
       <p>You</p>
+      <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
   `;
   div.classList.add("player-table-icon-self");
   }else{

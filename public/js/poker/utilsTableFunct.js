@@ -26,6 +26,8 @@ socket.on('player-list-complete', data =>{
    ul.querySelector(".smallBlind strong").textContent = `${data.smallBlind}`;
    ul.querySelector(".fichesValue strong").textContent =`${data.valFiches}`;
    ul.querySelector(".fichesNumber strong").textContent = `${data.numFiches}`;
-})
+     const fiches= document.querySelector(".fichesNumber strong").textContent;
+  document.querySelector(".attual-cash p strong").textContent = `${fiches}`;
+  })
 
 }

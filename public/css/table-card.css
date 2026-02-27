@@ -16,11 +16,6 @@
     background-color: green;
 }
 
-.dealer i{
-    position: absolute;
-    top: -5px;
-}
-
 .card{
     display: grid;
     gap: 10px;
