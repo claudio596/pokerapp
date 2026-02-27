@@ -28,7 +28,13 @@ socket.on('user-connected', data => {
   document.querySelector(".num-player .num").textContent = data.num;
   /* if (data.name === sessionStorage.getItem("user_name")) return; */
    appendMessage(`${data.name} joined`);
-   playerTableIcon(data.name);
+   playerTableIcon(data.name, data.tableId);
+})
+
+socket.on("table.full", ()=>{
+  document.querySelector("connection-state").style.display="none";
+  document.querySelector(".full-table").style.display="grid";
+
 })
 
 
@@ -50,7 +56,7 @@ if (li) li.remove();
             `;
   }
 
-  removeIconProfile(data.name);
+  removeIconProfile(data.name,data.tableId);
 })
 
 
@@ -73,7 +79,6 @@ socket.on("pong-test", () => {
 
 let tableInfo={
   first:0,
-  num:0,
   free:0,
   size:8
 }
@@ -85,12 +90,12 @@ const tablePos=[
 ]
 
 
-function playerTableIcon(name){
+function playerTableIcon(name,tableId){
   const table= document.querySelector(".table");
   const div = createElement("div");
   div.classList.add("player-table-icon");
   div.id = name;
-  div.dataset.itemid=tableInfo.num;
+  div.dataset.itemid=tableInfo.free;
   if(name===sessionStorage.getItem("user_name")){
    div.innerHTML= `
       <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
@@ -104,8 +109,7 @@ function playerTableIcon(name){
       <div class="time"><input type="range"><p><p></div>
   `;
   }
-  
-const style= tablePos[num];
+const style= tablePos[tableInfo.free];
 switch(style.pos){
   case "t-r":
     div.style.top=style.top;
@@ -124,13 +128,26 @@ switch(style.pos){
     div.style.left=style.left;
     break;
 }
-tableInfo.num++;
+  if(tableInfo.free == tableInfo.size){
+    socket.emit("table-full");
+  }
+
+  if(style.next== tableInfo.size){
+    socket.emit("table-full", tableId);
+  }else{
+    tableInfo.free= style.next;
+  }
+
   table.appendChild(div);
 }
 
-function removeIconProfile(name){
+function removeIconProfile(name,tableId){
   const div = document.getElementById(name);
   div.remove();
-  for(let i = num; )
-  num--;
+  if(tableInfo.free == tableInfo.size){
+    socket.emit("table-not-full", tableId);
+  }
+  style[div.dataset.itemid].next=tableInfo.free;
+  tableInfo.free= div.dataset.itemid;
+
 }

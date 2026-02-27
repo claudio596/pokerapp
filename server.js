@@ -72,7 +72,8 @@ socket.on("leave-table", ({ tableId, name }) => {
 
       io.to(user.id).emit("utente-disconnected", {
       name: user.name,
-      num: table.players
+      num: table.players,
+      tableId: user.id
     });
     
 
@@ -98,7 +99,8 @@ socket.on("leave-table", ({ tableId, name }) => {
 
       tables.push({ players: 0, id: tableId, 
         smallBlind: smallBlind, numFiches: numFiches, 
-        valFiches: valFiches, cashEntry: cashEntry
+        valFiches: valFiches, cashEntry: cashEntry,
+        full:false
       });
 
     socket.join(tableId);
@@ -107,6 +109,10 @@ socket.on("leave-table", ({ tableId, name }) => {
 
 socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   const table = tables.find(t => t.id === tableId);
+  if(table.full==true){
+    socket.emit("table-full", tableId);
+    return;
+  }
   if (!table) {
     socket.emit("table-not-found", tableId);
     return;
@@ -132,7 +138,8 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   // Notifica agli altri
   socket.to(tableId).emit("user-connected", {
     name: userName,
-    num: num_player
+    num: num_player,
+    tableId: tableId
   });
 
   // Lista utenti già presenti
@@ -158,6 +165,13 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   }
 
 });
+socket.on("table-full", tableId =>{
+  tables.find(t => t.id === tableId).full = true;
+})
+socket.on("table-not-full", tableId =>{
+  tables.find(t => t.id === tableId).full = false;
+})
+
 
 socket.on("check-table", (tableId, callback) => {
   const exists = tables.some(t => t.id === tableId);
