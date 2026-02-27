@@ -92,7 +92,7 @@ const tablePos=[
 
 function playerTableIcon(name,tableId){
   const table= document.querySelector(".table");
-  const div = createElement("div");
+  const div = document.createElement("div");
   div.classList.add("player-table-icon");
   div.id = name;
   div.dataset.itemid=tableInfo.free;
