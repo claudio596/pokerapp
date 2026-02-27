@@ -81,7 +81,7 @@ p.addEventListener("click", () => {
 
 const closeChat= document.querySelector(".close-chat");
 const openChat= document.querySelector(".open-chat");
-const chat= document.getElementById(".allmessage");
+const chat= document.querySelector(".allmessage");
 
 closeChat.addEventListener("click", () => {
   closeChat.classList.add("hidden");
