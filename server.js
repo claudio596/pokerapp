@@ -151,7 +151,9 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   socket.emit("player-list-complete", {
     userPast: userPast,
     num: num_player,
-     cashEntry: table.cashEntry,
+    tableId: tableId,
+    name: userName,
+    cashEntry: table.cashEntry,
     smallBlind: table.smallBlind,
     numFiches: table.numFiches,
     valFiches: table.valFiches

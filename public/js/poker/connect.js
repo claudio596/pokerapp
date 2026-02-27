@@ -106,10 +106,11 @@ function playerTableIcon(name,tableId){
   div.classList.add("player-table-icon-self");
   }else{
     div.innerHTML= `
-      <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
-      <p>${name}</p>
-      <p class="cash">fiches: <strong>${num_fiches}</strong></p>
-      <div class="time"><input type="range"><p><p></div>
+    <p>${name}</p>
+    <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
+    <p class="event">in attesa</p>
+    <p class="cash">fiches: <strong>${num_fiches}</strong></p>
+    <div class="time"><input type="range"><p><p></div>
   `;
   div.classList.add("player-table-icon");
   }
@@ -133,7 +134,7 @@ switch(style.pos){
     break;
 }
   if(tableInfo.free == tableInfo.size){
-    socket.emit("table-full");
+    socket.emit("table-full", tableId);
   }
 
   if(style.next== tableInfo.size){
