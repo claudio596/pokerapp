@@ -1,0 +1,82 @@
+.flex{
+    display: grid;
+    place-items: center;
+  }
+  .content{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    background-color: rgba(207, 207, 207, 0.308);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px black;
+  }
+
+  .input{
+    display: grid;
+    place-items: center;
+    row-gap: 10px;
+  }
+
+  #signup, #login{
+    display: grid;
+    row-gap: 10px;
+  }
+
+  #signup-content{
+    display: none;
+  }
+  
+  .signup-p, .login-p{
+    cursor: pointer;
+  }
+
+  .signup-p:hover, .login-p:hover{
+    text-decoration: underline;
+    color: rgba(59, 59, 247, 0.397);
+    font-size: 1.1rem;
+}
+  
+.input-box input{
+    width: 230px;
+    padding: 17px 13px;
+    border-radius: 8px;
+    border: 1px solid black;
+    outline: none;
+}
+
+.input-box{
+    position: relative;
+}
+
+.input-box label{
+    position: absolute;
+    top: 15px;
+    left: 13px;
+    color: black;
+    transition: .3s;
+}
+
+.input-box input:focus+label,
+.input-box input:valid+label{
+    top: -9px;
+    color: white;
+    font-size: 13px;
+    color: white;
+    background-color: black;
+    padding: 2px 7px;
+    border-radius: 12px;
+}
+
+.guest{
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    height: fit-content;
+}
+

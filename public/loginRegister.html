@@ -9,48 +9,8 @@
   <style>
   /* Reset */ 
   body, html{ font-family: 'Intro', Arial, Helvetica, sans-serif; line-height: 1; font-size: 16px; box-sizing: border-box;margin: 0;padding: 0;}*,*:before,*:after{ box-sizing: border-box; }h1,h2,h3,h4,h5,h6, p, ol, ul{margin: 0 0 1rem 0;padding: 0;}ol,ul{padding-left: 20px;line-height: 1.5;}img{height: auto;}h1{font-size: 4rem;} h2{font-size: 3rem;} h3{font-size: 2rem;} h4{font-size: 1rem;} h5{font-size: 0.8rem;} h6{font-size: 0.6rem;}a{text-decoration:none}
-  .flex{
-    display: grid;
-    place-items: center;
-  }
-  .content{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid black;
-    background-color: rgba(207, 207, 207, 0.308);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 5px 5px 10px black;
-  }
-
-  .input{
-    display: grid;
-    place-items: center;
-    row-gap: 10px;
-  }
-
-  #signup, #login{
-    display: grid;
-    row-gap: 10px;
-  }
-
-  #signup-content{
-    display: none;
-  }
-  
-  .signup-p, .login-p{
-    cursor: pointer;
-  }
-
-  .signup-p:hover, .login-p:hover{
-    text-decoration: underline;
-    color: rgba(59, 59, 247, 0.397);
-    font-size: 1.1rem;
-}
-  
   </style>
+  <link rel="stylesheet" href="css/loginRegister.css">
 
 </head>
 <body>
@@ -59,13 +19,13 @@
         <div class="input" id="signup-content">
             <h3>sign up</h3>
             <form id="signup">
-                <div class="flex">
-                    <label for="name">nome:</label>
-                <input type="text" id="nameregister">
+                <div class="input-box">
+                  <input type="text" id="nameregister">
+                    <label for="nameregister">nome:</label>
                 </div>
-                <div class="flex">
-                    <label for="password">password:</label>
-                <input type="password" id="passwordregister">
+                <div class="input-box">
+                    <input type="password" id="passwordregister">
+                    <label for="passwordregister">password:</label>
                 </div>
                 <div class="flex">
                     <button type="submit">sign up</button>
@@ -80,13 +40,13 @@
         <div class="input" id="login-content">
             <h3>login</h3>
              <form id="login" >
-                <div class="flex">
+                <div class="input-box">
+                  <input type="text" id="name">
                     <label for="name">nome:</label>
-                <input type="text" id="name">
                 </div>
-                <div class="flex">
+                <div class="input-box">
+                   <input type="password" id="password">
                     <label for="password">password:</label>
-                <input type="password" id="password">
                 </div>
                 <div class="flex">
                     <button type="submit">login</button>
@@ -97,6 +57,11 @@
                 <p class="signup-p">sign up</p>
             </div>
         </div>
+    </div>
+
+    <div class="guest">
+      <button title="i tuoi dati e progressi non verranno salvati">
+        gioca come ospite</button>
     </div>
     
     

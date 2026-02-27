@@ -85,5 +85,13 @@ document.querySelector(".signup-p").addEventListener("click", () => {
   document.getElementById("login-content").style.display = "none";
 });
 
+//entra come ospite
+let num_guest=1;
+document.querySelector(".guest").addEventListener("click", () => {
+  const name=`Guest(${num_guest})`;
+  num_guest++;
+  sessionStorage.setItem("user_name", name);
+  window.location.href = "home.html";
+});
 
 

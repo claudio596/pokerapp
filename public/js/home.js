@@ -11,6 +11,13 @@ async function loadUser() {
   
   if(sessionStorage.getItem("user_name") === null){
     window.location.href = "loginRegister.html";
+  }else if(sessionStorage.getItem("user_name").includes("Guest")){
+    document.querySelector(".profile").innerHTML:`
+    <p>${sessionStorage.getItem("user_name")}</p>
+    <button onclick="window.location.href = 'loginRegister.html'"
+    title="registrati per salvare i tuoi progressi e dati personali">
+    sign up</button>
+    `;
   }else{
   document.querySelector(".name").textContent = sessionStorage.getItem("user_name");
   }
