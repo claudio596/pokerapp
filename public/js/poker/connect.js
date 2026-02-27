@@ -104,13 +104,13 @@ function playerTableIcon(name,tableId){
   div.dataset.itemid=tableInfo.free;
   if(name==sessionStorage.getItem("user_name")){
    div.innerHTML= `
-      <p>You</p>
+      <p class="name">You</p>
       <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
   `;
   div.classList.add("player-table-icon-self");
   }else{
     div.innerHTML= `
-    <p>${name}</p>
+    <p class="name">${name}</p>
     <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
     <p class="event">in attesa</p>
     <p class="cash">fiches: <strong>${num_fiches}</strong></p>

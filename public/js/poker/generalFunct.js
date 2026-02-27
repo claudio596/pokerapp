@@ -76,3 +76,21 @@ p.addEventListener("click", () => {
 
   open_impTable = !open_impTable;
 })
+
+//chat
+
+const closeChat= document.querySelector(".close-chat");
+const openChat= document.querySelector(".open-chat");
+const chat= document.getElementById(".allmessage");
+
+closeChat.addEventListener("click", () => {
+  closeChat.classList.add("hidden");
+  chat.style.display = "none";
+  openChat.classList.remove("hidden");
+})
+
+openChat.addEventListener("click", () => {
+   chat.style.display = "block";
+  closeChat.classList.remove("hidden");
+  openChat.classList.add("hidden");
+})

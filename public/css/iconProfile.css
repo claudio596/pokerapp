@@ -21,8 +21,8 @@
     display: none;
 }
 
-.player-table-icon p,
-.player-table-icon-self p,
+.player-table-icon .name,
+.player-table-icon-self .name,
 .dealer p{
     border: 1px solid black;
     position: absolute;
