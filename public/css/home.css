@@ -130,6 +130,7 @@ all'exit
 #imp-table{
     display: grid;
     place-items: center;
+    gap: 5px;
 }
 
 .input-box input,
@@ -160,7 +161,7 @@ all'exit
 }
 
 .input-box input:focus+label,
-.input-box input:valid+label,
+.input-box input:input:not(:placeholder-shown)+label,
 .input-box .flex input:focus+label,
 .input-box .flex input:not(:placeholder-shown)+label{
     top: -5px;

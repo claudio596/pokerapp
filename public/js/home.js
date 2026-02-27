@@ -55,15 +55,15 @@ const div = document.querySelector(".gioca");
 div.innerHTML=`
 <div id="imp-table">
 <div class="input-box">
-<label for="numFiches">numero di fiches:</label>
 <input type="number" id="numFiches" value="40" required>
+<label for="numFiches">numero di fiches</label>
 </div>
 <div class="input-box">
-<label for="valFiches">valore fiches:</label>
 <div class="flex"> 
 <input type="number" id="valFiches" value="0.20" step="0.10" required>
 <p>€<p>
 </div>
+<label for="valFiches">valore fiches</label>
 </div>
 <label for="smallBlind">puntata minima:</label>
 <div class="radio-button">
