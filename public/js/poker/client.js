@@ -168,8 +168,10 @@ function attemptReconnect(){
   const user_uid=sessionStorage.getItem("user_uid");
   const userName=sessionStorage.getItem("user_name");
   const tableId=sessionStorage.getItem("table_id");
+  const p = document.querySelector(".reconnection .animate p");
+  let tentativi=1;
   const interval = setInterval(() => {
-    if (socket.connected) {
+    if (socket.connected || tentativi ==40) {
       clearInterval(interval);
 
       // Chiedi al server se il tavolo esiste
@@ -184,8 +186,11 @@ function attemptReconnect(){
 
         document.querySelector(".body").style.display="block";
         document.querySelector(".reconnection").style.display="none";
-        document.body.style.backgroundColor = "green";
+        document.body.style.backgroundColor = "rgb(82, 79, 79)";
       });
+    }else{
+      p.innerText = `Riprovo di connessione... tentativo ${tentativi}/40`;
+      tentativi++;
     }
   }, 2000);
 

@@ -92,6 +92,9 @@ all'exit
     width: 8px;
     animation: animate 2s ease-in-out infinite;
     background-color: black;
+}
+
+.connect .animate{
     display: flex;
     gap: 3px;
     justify-content: center;
