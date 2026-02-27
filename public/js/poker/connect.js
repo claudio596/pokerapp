@@ -72,10 +72,10 @@ socket.on("pong-test", () => {
 }
 
 let tableInfo={
-  first=0,
-  num=0,
-  free=0,
-  size=8
+  first:0,
+  num:0,
+  free:0,
+  size:8
 }
 const tablePos=[
   {top:"30px", right:"-5px",pos:"t-r",next:1},{bottom:"30px", right:"-5px", pos:"b-r",next:2},
