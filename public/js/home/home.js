@@ -166,15 +166,3 @@ AggiungiIMGprofile.addEventListener("click", () => {
    document.querySelector(".body").classList.toggle("dimmed");
   windowAggiungiIMGprofile.style.display = "grid";
 })
-
-const buttonFile=document.getElementById("file");
-
-buttonFile.addEventListener("change", () => {
-  const file = buttonFile.files[0];
-  const reader = new FileReader();
-  reader.onload = () => {
-    const preview= document.querySelector(".preview");
-    preview.style.backgroundImage = `url(${reader.result})`;
-  };
-  reader.readAsDataURL(file);
-});

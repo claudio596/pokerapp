@@ -13,6 +13,10 @@
 <link rel="stylesheet" href="css/home/home.css">
 <link rel="stylesheet" href="css/home/preofileMenu.css">
 <script src="https://kit.fontawesome.com/97566e8d05.js" crossorigin="anonymous"></script>
+
+<!-- cropper.js per editor immagine -->
+<link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.min.css">
+<script src="https://unpkg.com/cropperjs"></script>
 </head>
 <body>
 <div class="body">
@@ -86,6 +90,16 @@
       <p>X</p>
     </div>
     <div class="preview"></div>
+
+     <!-- Editor interno nascosto -->
+  <div class="editor hidden" id="editorBox">
+    <img id="cropImage">
+    <div class="editor-buttons">
+      <button id="cancelCrop">Annulla</button>
+      <button id="confirmCrop">Conferma</button>
+    </div>
+  </div>
+
     <label for="file" accept="image/*">scegli immagine</label>
     <input type="file" id="file">
     <div class="button">
@@ -98,7 +112,8 @@
 
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/home.js"></script>
+  <script src="js/home/home.js"></script>
+  <script src="js/home/previewer.js"></script>
 
 </body>
 </html>
