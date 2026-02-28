@@ -13,6 +13,8 @@ fileInput.addEventListener("change", e => {
   editorBox.classList.remove("hidden");
 
   cropImage.onload = () => {
+    console.log("IMG LOADED, CREATING CROPPER");
+
     if (cropper) cropper.destroy();
 
     cropper = new Cropper(cropImage, {
@@ -23,16 +25,21 @@ fileInput.addEventListener("change", e => {
       zoomable: true,
       movable: true
     });
+      console.log("CROPPER INSTANCE:", cropper);
+
   };
 });
 
 document.getElementById("confirmCrop").addEventListener("click", () => {
-  if (!cropper) return;
+  console.log("CROPPER AT CONFIRM:", cropper);
+
+    if (!cropper) return;
 
   const canvas = cropper.getCroppedCanvas({
     width: 300,
     height: 300
   });
+  console.log("CANVAS:", canvas);
 
   const base64 = canvas.toDataURL("image/png");
   avatarPreview.style.backgroundImage = `url(${base64})`;
