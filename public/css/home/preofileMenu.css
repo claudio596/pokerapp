@@ -27,12 +27,12 @@
 
 @keyframes close{
     0%{
-       transform: rotateX('0deg') translateX('0px');
+       transform: rotateX('0deg') ;
        display: grid;
     }
     100%{
         display: none;
-      transform: translateX(-100%) rotateX('-90deg');
+      transform: rotateX('-90deg');
     }
 }
 
@@ -61,9 +61,9 @@
 
 @keyframes enter{
     0%{
-        transform: translateX(-100%) rotateX('-90deg');
+        transform:  rotateX('-90deg');
     }100%{
-       transform: rotateX('0deg') translateX('0px');
+       transform: rotateX('0deg');
     }
 }
 
@@ -74,13 +74,14 @@
     display: flex;
     align-items: center;
     justify-content: right;
-    cursor: pointer;
+    
 }
 .profile-menu .close p{
     text-align: center;
     background-color: red;
     padding: 10px;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .profile-menu .header{
@@ -112,7 +113,6 @@
     overflow-wrap: break-word; /* moderno */
     word-wrap: break-word;     /* compatibilità */
     white-space: normal;       /* permette l'andata a capo */
-    word-break: break-all;
 }
 .profile-menu .option .element:first-child{
     border-top: 1px solid black;
@@ -145,5 +145,59 @@
 
 .profile-menu .logout button:hover{
     background-color: rgb(255, 0, 0);
+}
+
+/*aggiungi img profilo*/
+
+.image-profile{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: fit-content;
+    height: fit-content;
+    max-width: 300px;
+    max-height: 400px;
+    background-color: rgb(226, 181, 44);
+    display: none;
+    place-items: center;
+}
+.image-profile .close{
+    width: 100%;
+    height: fit-content;
+    padding: 3px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.image-profile .close p{
+    text-align: center;
+    background-color: red;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.image-profile .preview{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    overflow: hidden;
+    background-color: white;
+    margin: 15px 0px;
+}
+
+.image-profile .button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 7px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 

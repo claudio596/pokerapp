@@ -152,3 +152,10 @@ logOut.addEventListener("click", () => {
   localStorage.removeItem("user_id");
   window.location.href = "loginRegister.html";
 })
+
+const AggiungiIMGprofile= document.querySelector(".profile-menu .option .imgProfile");
+const windowAggiungiIMGprofile= document.querySelector(".image-profile");
+AggiungiIMGprofile.addEventListener("click", () => {
+   document.querySelector(".body").classList.toggle("dimmed");
+  windowAggiungiIMGprofile.style.display = "grid";
+})
