@@ -95,28 +95,40 @@ async function  base64ToBlob(base64) {
   return new Blob([buffer], { type: mime });
 }
 
-await client.storage
-  .from("avatars")
-  .upload(`avatar-${user.id}.png`, blob, {
-    upsert: true
-  });
 
+ document.querySelector(".image-profile .button button").addEventListener("click", async () => {
+    if (!blob) {
+        alert("Carica e taglia un'immagine prima di salvare!");
+        return;
+    }
 
-  document.querySelector(".image-profile .button button").addEventListener("click", async() => {
-      // Upload su Supabase
-  const { data: { user } } = await client.auth.getUser();
+    // 1. Ottieni l'utente
+    const { data: { user }, error: userError } = await client.auth.getUser();
+    if (userError || !user) return console.error("Utente non autenticato");
 
-   client.storage
-    .from("avatars")
-    .upload(`avatar-${user.id}.png`, blob, { upsert: true });
+    const fileName = `avatar-${user.id}.png`;
 
-    const { data } = client.storage
-  .from("avatars")
-  .getPublicUrl(`avatar-${user.id}.png`);
+    // 2. Upload del file blob su Supabase Storage
+    const { error: uploadError } = await client.storage
+        .from("avatars")
+        .upload(fileName, blob, { upsert: true });
 
-await client
-  .from("profiles")
-  .update({ avatar_url: data.publicUrl })
-  .eq("id", user.id);
+    if (uploadError) return console.error("Errore upload:", uploadError);
 
-  })
+    // 3. Ottieni l'URL pubblico
+    const { data: urlData } = client.storage
+        .from("avatars")
+        .getPublicUrl(fileName);
+
+    // 4. Aggiorna il profilo nel database
+    const { error: updateError } = await client
+        .from("profiles")
+        .update({ avatar_url: urlData.publicUrl })
+        .eq("id", user.id);
+
+    if (updateError) {
+        console.error("Errore database:", updateError);
+    } else {
+        alert("Profilo aggiornato con successo!");
+    }
+});
