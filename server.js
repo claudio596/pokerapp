@@ -208,12 +208,12 @@ socket.on("game-message", ({message,tableId}) =>{
 })
 
 socket.on("give-initial-card", tableId =>{
-  const table= tables_inGame.find(t => t.tableId === tableId);
+  const table= tables.find(t => t.id === tableId);
   let k;let i;
   //suhffle card
   const deck = shuffle(card);
 for( k=1; k<=2; k++){
-    for( i=0; i<table.player; i++){
+    for( i=0; i<table.player.length; i++){
       const player = table.player[i];
       const id_player= users.find(u => u.name === player).socketId;
       const card = deck[0];

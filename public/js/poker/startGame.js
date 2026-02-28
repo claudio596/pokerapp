@@ -89,7 +89,7 @@ if(total_player == num){
 
     socket.on("give-initial-card", card=>{
         const li = document.createElement("li");
-        li.textContent = "avvio prime 2 carte";
+        li.textContent = `carta num: ${card.num_card}`;
         document.querySelector(".connection-info").appendChild(li);
         const div= document.querySelector(`.card-${card.num_card}`);
         div.style.backgroundImage=`url(image/${card.card}.jpg)`;
@@ -97,6 +97,10 @@ if(total_player == num){
 
     
     socket.on("give-scarto", ()=>{
+        const li = document.createElement("li");
+        li.textContent = "scarto";
+        document.querySelector(".connection-info").appendChild(li);
+        
         const div= document.querySelector(".scarto");
         div.style.backgroundImage="url(image/scarto.jpg)";
         socket.emit("prima-puntata", {
@@ -120,7 +124,7 @@ if(total_player == num){
 
 
 function rimuoviPronto(){
-     let num= document.querySelector(".pronti").textContent;
+     const num= document.querySelector(".pronti").textContent;
     socket.emit("remove-player-pronti", {
         num:num,
         tableId: sessionStorage.getItem("table_id"),
