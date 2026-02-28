@@ -155,6 +155,13 @@ logOut.addEventListener("click", () => {
 
 const AggiungiIMGprofile= document.querySelector(".profile-menu .option .imgProfile");
 const windowAggiungiIMGprofile= document.querySelector(".image-profile");
+const closeAggiungiIMGprofile=document.querySelector(".image-profile .close p");
+
+closeAggiungiIMGprofile.addEventListener("click", () => {
+  document.querySelector(".body").classList.toggle("dimmed");
+  windowAggiungiIMGprofile.style.display = "none";
+})
+
 AggiungiIMGprofile.addEventListener("click", () => {
    document.querySelector(".body").classList.toggle("dimmed");
   windowAggiungiIMGprofile.style.display = "grid";
@@ -167,7 +174,7 @@ buttonFile.addEventListener("change", () => {
   const reader = new FileReader();
   reader.onload = () => {
     const preview= document.querySelector(".preview");
-    preview.src = reader.result;
+    preview.style.backgroundImage = `url(${reader.result})`;
   };
   reader.readAsDataURL(file);
 });
