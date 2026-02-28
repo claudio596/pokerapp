@@ -1,9 +1,10 @@
 let cropper;
-
+let blob;
 const fileInput = document.getElementById("file");
 const editorBox = document.getElementById("editorBox");
 const cropImage = document.getElementById("cropImage");
 const avatarPreview = document.querySelector(".preview");
+
 
 fileInput.addEventListener("change", e => {
   const file = e.target.files[0];
@@ -77,4 +78,45 @@ avatarPreview.style.backgroundImage = `url(${base64})`;
 
   editorBox.classList.add("hidden");
   cropper.destroy();
+   blob = base64ToBlob(base64);
 });
+
+function base64ToBlob(base64) {
+  const parts = base64.split(',');
+  const mime = parts[0].match(/:(.*?);/)[1];
+  const binary = atob(parts[1]);
+  let length = binary.length;
+  let buffer = new Uint8Array(length);
+
+  while (length--) {
+    buffer[length] = binary.charCodeAt(length);
+  }
+
+  return new Blob([buffer], { type: mime });
+}
+
+await supabase.storage
+  .from("avatars")
+  .upload(`avatar-${user.id}.png`, blob, {
+    upsert: true
+  });
+
+
+  document.querySelector(".image-profile .button button").addEventListener("click", async() => {
+      // Upload su Supabase
+  const { data: { user } } = await supabase.auth.getUser();
+
+  await supabase.storage
+    .from("avatars")
+    .upload(`avatar-${user.id}.png`, blob, { upsert: true });
+
+    const { data } = supabase.storage
+  .from("avatars")
+  .getPublicUrl(`avatar-${user.id}.png`);
+
+await supabase
+  .from("profiles")
+  .update({ avatar_url: data.publicUrl })
+  .eq("id", user.id);
+
+  })
