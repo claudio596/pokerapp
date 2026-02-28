@@ -55,6 +55,7 @@ document.getElementById("imp-create-table").addEventListener("click", () => {
 const div = document.querySelector(".gioca");
 div.innerHTML=`
 <div id="imp-table">
+<i onclick="backHome();" class="fa-solid fa-arrow-left" id="backHome" style="color: rgb(255, 255, 255);"></i>
 <h4>Table rules</h4>
 <div class="input-box">
 <input type="number" id="numFiches" value="40" required>
@@ -78,6 +79,14 @@ div.innerHTML=`
   
   
 });
+
+function backHome(){
+  const div = document.querySelector(".gioca");
+  div.innerHTML=
+ ` <h4>pokerizza il tutto</h4>
+    <button id="imp-create-table" type="button">crea un tavolo</button>
+    <button id="join-Table">unisciti ad un tavolo</button>`;
+}
 
 function createTable(){
     const tableId = Math.random().toString(36).substring(2, 8);

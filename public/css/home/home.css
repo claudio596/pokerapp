@@ -182,3 +182,7 @@ all'exit
     place-items: center;
 }
 
+#backHome{
+    cursor: pointer;
+}
+
