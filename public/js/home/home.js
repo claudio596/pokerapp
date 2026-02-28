@@ -48,7 +48,7 @@ document.querySelector(".no-exit").addEventListener("click", () => {
 
 
 // Quando clicchi "crea un tavolo"
-document.getElementById("imp-create-table").addEventListener("click", () => {
+function ImpCreateTable(){
   
   // Genera ID tavolo unico
 
@@ -78,14 +78,14 @@ div.innerHTML=`
 `;
   
   
-});
+}
 
 function backHome(){
   const div = document.querySelector(".gioca");
   div.innerHTML=
  ` <h4>pokerizza il tutto</h4>
-    <button id="imp-create-table" type="button">crea un tavolo</button>
-    <button id="join-Table">unisciti ad un tavolo</button>`;
+    <button onclick="ImpCreateTable()" id="imp-create-table" type="button">crea un tavolo</button>
+    <button onclick="joinTableImp();" id="join-Table">unisciti ad un tavolo</button>`;
 }
 
 function createTable(){
@@ -124,7 +124,7 @@ socket.on("table-created", (id) => {
   window.location.href = "poker.html";
 });
 
-document.getElementById("join-Table").addEventListener("click", () => {
+function joinTableImp(){
  document.querySelector(".gioca").innerHTML=`
  <form id="join">
  <label for="tableId">ID tavolo:</label>
@@ -134,7 +134,7 @@ document.getElementById("join-Table").addEventListener("click", () => {
  `;
 
  document.getElementById("joinbtn").addEventListener("click", joinTable);
-})
+}
 
 function joinTable(){
   const tableId = document.getElementById("tableId").value;
