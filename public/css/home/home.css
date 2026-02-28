@@ -186,7 +186,7 @@ all'exit
     cursor: pointer;
 }
 
-.imp-table .header,
+#imp-table .header,
 #join .header{
     display: flex;
     justify-content: space-between;
