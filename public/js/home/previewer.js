@@ -81,7 +81,7 @@ avatarPreview.style.backgroundImage = `url(${base64})`;
    blob = base64ToBlob(base64);
 });
 
-async function  base64ToBlob(base64) {
+ function  base64ToBlob(base64) {
   const parts = base64.split(',');
   const mime = parts[0].match(/:(.*?);/)[1];
   const binary = atob(parts[1]);
@@ -97,38 +97,54 @@ async function  base64ToBlob(base64) {
 
 
  document.querySelector(".image-profile .button button").addEventListener("click", async () => {
-    if (!blob) {
+    // 1. Verifica se il blob esiste (ed eventualmente aspetta se fosse una Promise)
+    const finalBlob = await blob; 
+    
+    if (!finalBlob) {
         alert("Carica e taglia un'immagine prima di salvare!");
         return;
     }
 
-    // 1. Ottieni l'utente
+    // 2. Ottieni l'utente autenticato
     const { data: { user }, error: userError } = await client.auth.getUser();
-    if (userError || !user) return console.error("Utente non autenticato");
+    if (userError || !user) {
+        alert("Devi essere loggato per cambiare avatar");
+        return;
+    }
 
     const fileName = `avatar-${user.id}.png`;
 
-    // 2. Upload del file blob su Supabase Storage
-    const { error: uploadError } = await client.storage
+    // 3. Upload su Supabase Storage
+    const { data: uploadData, error: uploadError } = await client.storage
         .from("avatars")
-        .upload(fileName, blob, { upsert: true });
+        .upload(fileName, finalBlob, { 
+            upsert: true,
+            contentType: 'image/png' // Specifica il tipo per sicurezza
+        });
 
-    if (uploadError) return console.error("Errore upload:", uploadError);
+    if (uploadError) {
+        console.error("Errore upload:", uploadError.message);
+        return;
+    }
 
-    // 3. Ottieni l'URL pubblico
+    // 4. Ottieni l'URL pubblico
     const { data: urlData } = client.storage
         .from("avatars")
         .getPublicUrl(fileName);
 
-    // 4. Aggiorna il profilo nel database
+    const publicUrl = urlData.publicUrl;
+
+    // 5. Aggiorna la riga nella tabella 'profiles' filtrando per l'ID utente
     const { error: updateError } = await client
         .from("profiles")
-        .update({ avatar_url: urlData.publicUrl })
-        .eq("id", user.id);
+        .update({ avatar_url: publicUrl }) // Aggiorna la colonna avatar_url
+        .eq("id", user.id);               // Seleziona la riga corretta
 
     if (updateError) {
-        console.error("Errore database:", updateError);
+        console.error("Errore database:", updateError.message);
     } else {
-        alert("Profilo aggiornato con successo!");
+        alert("Immagine del profilo aggiornata!");
+        // Opzionale: ricarica la pagina o aggiorna l'interfaccia
     }
 });
+
