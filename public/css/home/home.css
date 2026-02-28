@@ -142,7 +142,8 @@ all'exit
 }
 
 .input-box input,
-.input-box .flex input{
+.input-box .flex input,
+#join .input-box input{
     width: 150px;
     padding: 12px 8px;
     border-radius: 8px;
@@ -155,7 +156,8 @@ all'exit
     position: relative;
 }
 
-.input-box label{
+.input-box label,
+#join .input-box label{
     position: absolute;
     top: 10px;
     left: 8px;
@@ -164,7 +166,9 @@ all'exit
 }
 
 .input-box input:focus+label,
-.input-box input:not(:placeholder-shown) + label{
+.input-box input:not(:placeholder-shown) + label,
+#join .input-box input:focus+label,
+#join .input-box input:valid + label{
     top: -5px;
     color: white;
     font-size: 9px;
@@ -190,7 +194,7 @@ all'exit
 #join .header{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     width: 100%;
     height: fit-content;
     padding: 4px 3px;
