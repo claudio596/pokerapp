@@ -3,9 +3,14 @@
 .profile-menu{
     display: none;
     pointer-events: none;
-    animation: close 1s ease-in-out;
-    width: fit-content;
+    animation: close .2s ease-in-out;
+   width:fit-content;
     height: fit-content;
+    max-width: 200px;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
     position: absolute;
     right: 0px;
     top:0px;
@@ -14,6 +19,10 @@
     background-color: rgb(226, 181, 44);
     padding-bottom: 10px;
     padding-left: 0px;
+}
+
+.profile-menu::-webkit-scrollbar{
+    display: none;
 }
 
 @keyframes close{
@@ -119,10 +128,11 @@
     display: grid;
     place-items: center;
     height: fit-content;
+    padding-top: 15px;
 }
 
 .profile-menu .logout button{
-     padding: 4px 2px;
+     padding: 8px 6px;
     cursor: pointer;
     text-align: center;
      transition: .3s;
@@ -130,6 +140,7 @@
      border-radius: 10px;
     border: 2px solid black;
     background-color: rgb(185, 71, 71);
+    font-weight: bold;
 }
 
 .profile-menu .logout button:hover{

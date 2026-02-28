@@ -135,7 +135,7 @@ function joinTable(){
 }
 
 const openMenu= document.querySelector(".menu .profile");
-const closeMenu= document.querySelector(".profile-menu .close i");
+const closeMenu= document.querySelector(".profile-menu .close p");
 const profileMenu= document.querySelector(".profile-menu");
 const logOut= document.querySelector(".logout");
 openMenu.addEventListener("click", () => {
