@@ -213,6 +213,8 @@ all'exit
     gap: 15px;
     background-color: rgba(70, 54, 5, 0.445);
     animation: enter .5s ease-in-out;
+    width: fit-content;
+    height: fit-content;
 }
 
 @keyframes enter{
