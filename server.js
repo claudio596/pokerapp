@@ -193,7 +193,7 @@ socket.on("remove-player-pronti", ({num,tableId,name}) => {
   io.to(tableId).emit("remove-player-pronti-visual",name);
 })
 
-socket.on("remove-player-pronti-visual", ({tableId})=>{
+socket.on("remove-player-pronti-visual", tableId =>{
   io.to(tableId).emit("remove-general-event",{
     users: tables.find(t => t.id === tableId).players
   });

@@ -22,18 +22,15 @@ if(total_player == num){
     document.querySelector(".game-options .info").innerHTML=`
     <div class="game-utils check"> check </div> <div class="game-utils call"> call </div>
      `;
+     const tableid= sessionStorage.getItem("table_id");
     const message = "start";
     socket.emit("game-message", {
         message:message,
-        tableId: sessionStorage.getItem("table_id")
+        tableId: tableid
     });
 
-    socket.emit("give-initial-card", {
-        tableId: sessionStorage.getItem("table_id")
-    })
-    socket.emit("remove-player-pronti-visual",{
-        tableId: data.tableId
-    })
+    socket.emit("give-initial-card", tableid )
+    socket.emit("remove-player-pronti-visual",tableid)
 
     const li=document.createElement("li");
     li.textContent = "avvio game";
@@ -100,7 +97,7 @@ if(total_player == num){
         const li = document.createElement("li");
         li.textContent = "scarto";
         document.querySelector(".connection-info").appendChild(li);
-        
+
         const div= document.querySelector(".scarto");
         div.style.backgroundImage="url(image/scarto.jpg)";
         socket.emit("prima-puntata", {
