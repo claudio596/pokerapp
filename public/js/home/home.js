@@ -135,7 +135,7 @@ function joinTableImp(){
  </div>
  <div class="input-box2">
   <input type="text" id="tableId" name="tableId" required>
- <label for="tableId">ID tavolo:</label>
+ <label for="tableId">ID tavolo</label>
  </div>
  <button id="joinbtn" type="button">Unisciti</button>
  </form>
