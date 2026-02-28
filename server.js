@@ -195,7 +195,7 @@ socket.on("remove-player-pronti", ({num,tableId,name}) => {
 
 socket.on("remove-player-pronti-visual", ({tableId})=>{
   io.to(tableId).emit("remove-general-event",{
-    users: tables.find(t => t.id === tableId).player
+    users: tables.find(t => t.id === tableId).players
   });
 })
 
@@ -213,8 +213,8 @@ socket.on("give-initial-card", tableId =>{
   //suhffle card
   const deck = shuffle(card);
 for( k=1; k<=2; k++){
-    for( i=0; i<table.player.length; i++){
-      const player = table.player[i];
+    for( i=0; i<table.players.length; i++){
+      const player = table.players[i];
       const id_player= users.find(u => u.name === player).socketId;
       const card = deck[0];
       socket.to(id_player).emit("give-initial-card", {
