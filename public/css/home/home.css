@@ -184,6 +184,14 @@ all'exit
 
 #backHome{
     cursor: pointer;
-    color: black;
 }
 
+.imp-table .header,
+#join .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    padding: 4px 3px;
+}

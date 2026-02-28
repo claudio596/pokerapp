@@ -55,8 +55,10 @@ function ImpCreateTable(){
 const div = document.querySelector(".gioca");
 div.innerHTML=`
 <div id="imp-table">
-<i onclick="backHome();" class="fa-solid fa-arrow-left" id="backHome" style="color: rgb(255, 255, 255);"></i>
+<div class="header">
+<i onclick="backHome();" class="fa-solid fa-arrow-left" id="backHome" style="color: rgb(0, 0, 0);"></i>
 <h4>Table rules</h4>
+</div>
 <div class="input-box">
 <input type="number" id="numFiches" value="40" required>
 <label for="numFiches">numero di fiches</label>
@@ -127,7 +129,10 @@ socket.on("table-created", (id) => {
 function joinTableImp(){
  document.querySelector(".gioca").innerHTML=`
  <form id="join">
+ <div class="header">
+ <i onclick="backHome();" class="fa-solid fa-arrow-left" id="backHome" style="color: rgb(0, 0, 0);"></i>
  <label for="tableId">ID tavolo:</label>
+ </div>
  <input type="text" id="tableId" name="tableId" required>
  <button id="joinbtn" type="button">Unisciti</button>
  </form>
