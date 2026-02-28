@@ -126,13 +126,28 @@ document.getElementById("join-Table").addEventListener("click", () => {
  document.getElementById("joinbtn").addEventListener("click", joinTable);
 })
 
-
-
-
-
 function joinTable(){
   const tableId = document.getElementById("tableId").value;
   sessionStorage.setItem("table_id", tableId);
 
    window.location.href = `poker.html`;
 }
+
+const openMenu= document.querySelector(".profile i");
+const closeMenu= document.querySelector(".profile-menu .close i");
+const profileMenu= document.querySelector(".profile-menu");
+const logOut= document.querySelector(".logout");
+openMenu.addEventListener("click", () => {
+  profileMenu.classList.add("active");
+  openMenu.style.pointerEvents="none";
+})
+
+closeMenu.addEventListener("click", () => {
+  profileMenu.classList.remove("active");
+  openMenu.style.pointerEvents="all";
+})
+
+logOut.addEventListener("click", () => {
+  localStorage.removeItem("user_id");
+  window.location.href = "loginRegister.html";
+})

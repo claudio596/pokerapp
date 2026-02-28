@@ -8,7 +8,8 @@
         document.querySelector(".game-options .option").style.display="block";
     });
 
-    socket.on("player-pronti", num =>{
+    socket.on("player-pronti", data =>{
+        const num = data.num;
         const li = document.createElement("li");
         li.textContent = `giocatori pronto: ${num}`;
         document.querySelector(".connection-info").appendChild(li);
@@ -30,6 +31,9 @@ if(total_player == num){
     socket.emit("give-initial-card", {
         tableId: sessionStorage.getItem("table_id")
     })
+    socket.emit("remove-player-pronti-visual",{
+        tableId: data.tableId
+    })
 }
 
 //fine player pronti
@@ -50,6 +54,16 @@ if(total_player == num){
         p.innerText = "";
         p.style.backgroundColor="";
         p.style.display="none";
+    })
+
+    socket.on("remove-general-event",users => {
+        users.forEach(user => {
+            const div = document.getElementById(user);
+            const p=div.querySelector(".event");
+            p.innerText = "";
+            p.style.backgroundColor="";
+            p.style.display="none";
+        });
     })
 
     socket.on("game-message", message => {
