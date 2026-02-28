@@ -81,7 +81,7 @@ avatarPreview.style.backgroundImage = `url(${base64})`;
    blob = base64ToBlob(base64);
 });
 
-function base64ToBlob(base64) {
+async function  base64ToBlob(base64) {
   const parts = base64.split(',');
   const mime = parts[0].match(/:(.*?);/)[1];
   const binary = atob(parts[1]);
