@@ -18,7 +18,6 @@ async function loadUser() {
     title="registrati per salvare i tuoi progressi e dati personali">
     sign up</button>
     `;
-    document.querySelector(".profile").style.pointerEvents="none";
   }else{
   document.querySelector(".name").textContent = sessionStorage.getItem("user_name");
   document.querySelector(".profile-menu .header p").textContent = sessionStorage.getItem("user_name");
@@ -135,7 +134,7 @@ function joinTable(){
    window.location.href = `poker.html`;
 }
 
-const openMenu= document.querySelector(".profile");
+const openMenu= document.querySelector(".menu .profile");
 const closeMenu= document.querySelector(".profile-menu .close i");
 const profileMenu= document.querySelector(".profile-menu");
 const logOut= document.querySelector(".logout");
