@@ -39,7 +39,7 @@ document.getElementById("signup").addEventListener("submit", async (e) => {
   }
 
   // Salva sessione locale
-  sessionStorage.setItem("user_name", data.id);
+  sessionStorage.setItem("user_name", data.name);
   window.location.href = "home.html";
 });
 
