@@ -18,14 +18,31 @@ fileInput.addEventListener("change", e => {
     if (cropper) cropper.destroy();
 
     cropper = new Cropper(cropImage, {
-      aspectRatio: 1,
-      viewMode: 1,
-      dragMode: "move",
-      background: false,
-      zoomable: true,
-      movable: true
+  aspectRatio: 1,          // quadrato → diventa cerchio con CSS
+  viewMode: 1,
+  dragMode: "move",
+  background: false,
+  zoomable: true,
+  movable: true,
+  scalable: false,
+  rotatable: false,
+  cropBoxResizable: false, // NON modificabile
+  cropBoxMovable: false,   // NON spostabile
+  ready() {
+    // Imposta la crop box alla dimensione reale dell’avatar
+    const avatarSize = 150; // <-- la tua dimensione reale
+    const containerData = cropper.getContainerData();
+    const left = (containerData.width - avatarSize) / 2;
+    const top = (containerData.height - avatarSize) / 2;
+
+    cropper.setCropBoxData({
+      left,
+      top,
+      width: avatarSize,
+      height: avatarSize
     });
-      console.log("CROPPER INSTANCE:", cropper);
+  }
+});
 
   };
 });
@@ -36,13 +53,27 @@ document.getElementById("confirmCrop").addEventListener("click", () => {
     if (!cropper) return;
 
   const canvas = cropper.getCroppedCanvas({
-    width: 300,
-    height: 300
-  });
+  width: 150,
+  height: 150
+});
+
+// maschera circolare
+const circleCanvas = document.createElement("canvas");
+circleCanvas.width = 150;
+circleCanvas.height = 150;
+
+const ctx = circleCanvas.getContext("2d");
+ctx.beginPath();
+ctx.arc(75, 75, 75, 0, Math.PI * 2);
+ctx.closePath();
+ctx.clip();
+ctx.drawImage(canvas, 0, 0, 150, 150);
+
+const base64 = circleCanvas.toDataURL("image/png");
+avatarPreview.style.backgroundImage = `url(${base64})`;
   console.log("CANVAS:", canvas);
 
-  const base64 = canvas.toDataURL("image/png");
-  avatarPreview.style.backgroundImage = `url(${base64})`;
+  
 
   editorBox.classList.add("hidden");
   cropper.destroy();
