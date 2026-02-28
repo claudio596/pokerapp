@@ -189,7 +189,7 @@ socket.on("player-pronti", ({num,tableId,name}) => {
 
 socket.on("remove-player-pronti", ({num,tableId,name}) => {
   num = Number(num) -1;
-  io.to(tableId).emit("player-pronti", num);
+  io.to(tableId).emit("player-pronti", {num:num});
   io.to(tableId).emit("remove-player-pronti-visual",name);
 })
 
