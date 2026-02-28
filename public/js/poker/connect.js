@@ -50,6 +50,9 @@ if (li) li.remove();
   document.querySelector(".num-player .num").textContent = data.num;
 
   if(data.num < 2){
+    const li = document.createElement("li");
+    li.textContent = "in attesa di altri giocatori..";
+    document.querySelector(".connection-info").appendChild(li);
      document.querySelector(".game-options .option").style.display="none";
             document.querySelector(".game-options .info").innerHTML=`
             <p>in attesa di altri giocatori <strong class="point">.</strong><strong class="point">.</strong><strong class="point">.</strong></p>

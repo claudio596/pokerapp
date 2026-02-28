@@ -34,6 +34,10 @@ if(total_player == num){
     socket.emit("remove-player-pronti-visual",{
         tableId: data.tableId
     })
+
+    const li=document.createElement("li");
+    li.textContent = "avvio game";
+    document.querySelector(".connection-info").appendChild(li);
 }
 
 //fine player pronti
@@ -57,6 +61,9 @@ if(total_player == num){
     })
 
     socket.on("remove-general-event",users => {
+        const li = document.createElement("li");
+        li.textContent = "remove general event";
+        document.querySelector(".connection-info").appendChild(li);
         users.forEach(user => {
             const div = document.getElementById(user);
             const p=div.querySelector(".event");
@@ -67,6 +74,9 @@ if(total_player == num){
     })
 
     socket.on("game-message", message => {
+        const li = document.createElement("li");
+        li.textContent = `game-message: ${message}`;
+        document.querySelector(".connection-info").appendChild(li);
         const p = document.querySelector(".event-game");
         p.textContent =` ${message}`;
         p.classList.add("active");
