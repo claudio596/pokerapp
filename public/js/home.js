@@ -166,7 +166,7 @@ buttonFile.addEventListener("change", () => {
   const file = buttonFile.files[0];
   const reader = new FileReader();
   reader.onload = () => {
-    const preview= document.gquerySelector(".preview");
+    const preview= document.querySelector(".preview");
     preview.src = reader.result;
   };
   reader.readAsDataURL(file);
