@@ -133,7 +133,7 @@ function joinTableImp(){
  <i onclick="backHome();" class="fa-solid fa-arrow-left" id="backHome" style="color: rgb(0, 0, 0);"></i>
  <h4>unisciti ad un tavolo</h4>
  </div>
- <div class="input-box">
+ <div class="input-box2">
   <input type="text" id="tableId" name="tableId" required>
  <label for="tableId">ID tavolo:</label>
  </div>

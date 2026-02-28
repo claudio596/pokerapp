@@ -143,7 +143,7 @@ all'exit
 
 .input-box input,
 .input-box .flex input,
-#join .input-box input{
+#join .input-box2 input{
     width: 150px;
     padding: 12px 8px;
     border-radius: 8px;
@@ -157,7 +157,7 @@ all'exit
 }
 
 .input-box label,
-#join .input-box label{
+#join .input-box2 label{
     position: absolute;
     top: 10px;
     left: 8px;
@@ -167,8 +167,8 @@ all'exit
 
 .input-box input:focus+label,
 .input-box input:not(:placeholder-shown) + label,
-#join .input-box input:focus+label,
-#join .input-box input:valid + label{
+#join .input-box2 input:focus+label,
+#join .input-box2 input:valid + label{
     top: -5px;
     color: white;
     font-size: 9px;
