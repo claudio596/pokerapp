@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
+import { table } from "console";
  
 const app = express();
 app.use(cors());
@@ -97,10 +98,10 @@ socket.on("leave-table", ({ tableId, name }) => {
   socket.on("createTable", ({ 
     tableId,smallBlind,numFiches,valFiches,cashEntry }) => {
 
-      tables.push({ players: 0, id: tableId, 
+      tables.push({ players: [], id: tableId, 
         smallBlind: smallBlind, numFiches: numFiches, 
         valFiches: valFiches, cashEntry: cashEntry,
-        full:false
+        full:false, tableInGame:false, tableGame:[]
       });
 
     socket.join(tableId);
@@ -128,12 +129,12 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
     socketId: socket.id,
     user_uid
   });
+  tables.find(t => t.id === tableId).players.push(userName);
   }else{
     user.socketId = socket.id;
   }
 
-  table.players = users.filter(u => u.id === tableId).length;
-  const num_player = table.players;
+  const num_player = tables.find(t => t.id === tableId).players.length;
 
   // Notifica agli altri
   socket.to(tableId).emit("user-connected", {
@@ -143,9 +144,7 @@ socket.on("joinTable", ({ tableId, userName, user_uid }) => {
   });
 
   // Lista utenti già presenti
-  const userPast = users
-    .filter(u => u.id === tableId)
-    .map(u => u.name);
+  const userPast = tables.find(t => t.id === tableId).players;
 
   // Invia SOLO al nuovo utente
   socket.emit("player-list-complete", {
@@ -185,23 +184,20 @@ socket.on("check-table", (tableId, callback) => {
 socket.on("player-pronti", ({num,tableId,name}) => {
   num = Number(num) +1;
   io.to(tableId).emit("player-pronti", num);
-  socket.to(tableId).emit("player-pronti-visual", name);
+  io.to(tableId).emit("player-pronti-visual", name);
 });
 
 socket.on("remove-player-pronti", ({num,tableId,name}) => {
   num = Number(num) -1;
   io.to(tableId).emit("player-pronti", num);
-  socket.to(tableId).emit("remove-player-pronti-visual",name);
+  io.to(tableId).emit("remove-player-pronti-visual",name);
 })
 
 socket.on("game-message", ({message,tableId}) =>{
-  if(message == "start" && init_game==false){
-    init_game=true;
-    const player= users.filter(u => u.id === tableId).map(u => u.name);
-    const num_player= player.length;
-    tables_inGame.push({player:player, tableId:tableId,
-      num:num_player,first:0});
-  }
+  if(message == "start" && 
+    tables.find(t => t.id === tableId).tableInGame==false){
+    tables.find(t => t.id === tableId).tableInGame=true;
+    }
   io.to(tableId).emit("game-message", message);
 })
 

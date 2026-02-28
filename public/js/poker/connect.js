@@ -106,7 +106,8 @@ function playerTableIcon(name,tableId){
    div.innerHTML= `
       <p class="name">You</p>
       <i class="fa-regular fa-circle-user fa-2xl" style="color: grey;"></i>
-  `;
+      <p class="event">in attesa</p>
+      `;
   div.classList.add("player-table-icon-self");
   }else{
     div.innerHTML= `

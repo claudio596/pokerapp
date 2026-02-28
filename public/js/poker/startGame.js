@@ -53,7 +53,13 @@ if(total_player == num){
     })
 
     socket.on("game-message", message => {
-        document.querySelector(".event-game").innerText = message;
+        const p = document.querySelector(".event-game");
+        p.textContent =` ${message}`;
+        p.classList.add("active");
+        setTimeout(() => {
+            p.classList.remove("active");
+        }, 3000);
+        
     });
 
 
