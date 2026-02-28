@@ -221,7 +221,7 @@ for( k=1; k<=2; k++){
         card:card,
         num_card: k
       });
-       deck.remove(card);
+      deck = deck.filter(card => card !== deck[0]);
   }
 }
 io.to(tableId).emit("give-scarto");
