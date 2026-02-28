@@ -3,8 +3,8 @@
 .profile-menu{
     display: none;
     pointer-events: none;
-    animation: close .5s ease-in-out;
-     width: fit-content;
+    animation: close 1s ease-in-out;
+    width: fit-content;
     height: fit-content;
     position: absolute;
     right: 0px;
@@ -12,6 +12,8 @@
     z-index: 9999;
     gap: 15px;
     background-color: rgb(226, 181, 44);
+    padding-bottom: 10px;
+    padding-left: 0px;
 }
 
 @keyframes close{
@@ -31,12 +33,21 @@
     position: absolute;
     right: 0px;
     top:0px;
-    z-index: 9999;
+    z-index: 1;
     gap: 15px;
  background-color: rgb(226, 181, 44);
-    animation: enter .5s ease-in-out;
-    width: fit-content;
+    animation: enter 1s ease-in-out;
+    width:fit-content;
     height: fit-content;
+    max-width: 200px;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.profile-menu.active::-webkit-scrollbar{
+    display: none;
 }
 
 @keyframes enter{
@@ -56,7 +67,8 @@
     justify-content: right;
     cursor: pointer;
 }
-.profile-menu .close i{
+.profile-menu .close p{
+    text-align: center;
     background-color: red;
     padding: 10px;
     border-radius: 50%;
@@ -69,11 +81,12 @@
     color: black;
 }
 .profile-menu .option{
-    list-style-type: none;
+    display: grid;
+    gap: 0px;
     width: 100%;
 }
 
-.profile-menu .option li{
+.profile-menu .option .element{
     padding: 4px 2px;
     cursor: pointer;
     transition: .3s;
@@ -85,12 +98,19 @@
     border-bottom: 1px solid black;
     width: 100%;
 }
-.profile-menu .option li:first-child{
+
+.profile-menu .option .element p{
+    overflow-wrap: break-word; /* moderno */
+    word-wrap: break-word;     /* compatibilità */
+    white-space: normal;       /* permette l'andata a capo */
+    word-break: break-all;
+}
+.profile-menu .option .element:first-child{
     border-top: 1px solid black;
 }
 
 
-.profile-menu .option li:hover{
+.profile-menu .option .element:hover{
     background-color: rgba(70, 54, 5, 0.445);
 }
 
@@ -108,7 +128,7 @@
      transition: .3s;
     color: black;
      border-radius: 10px;
-    border: 1px solid black;
+    border: 2px solid black;
     background-color: rgb(185, 71, 71);
 }
 
