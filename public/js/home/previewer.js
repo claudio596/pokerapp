@@ -95,7 +95,7 @@ function base64ToBlob(base64) {
   return new Blob([buffer], { type: mime });
 }
 
-await supabase.storage
+await client.storage
   .from("avatars")
   .upload(`avatar-${user.id}.png`, blob, {
     upsert: true
@@ -104,17 +104,17 @@ await supabase.storage
 
   document.querySelector(".image-profile .button button").addEventListener("click", async() => {
       // Upload su Supabase
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await client.auth.getUser();
 
-  await supabase.storage
+   client.storage
     .from("avatars")
     .upload(`avatar-${user.id}.png`, blob, { upsert: true });
 
-    const { data } = supabase.storage
+    const { data } = client.storage
   .from("avatars")
   .getPublicUrl(`avatar-${user.id}.png`);
 
-await supabase
+await client
   .from("profiles")
   .update({ avatar_url: data.publicUrl })
   .eq("id", user.id);
