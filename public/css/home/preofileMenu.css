@@ -196,6 +196,22 @@
 
 /*editor*/
 .editor {
+  position: relative;
+}
+
+.cropper-view-box,
+.cropper-face {
+  border-radius: 50% !important;
+}
+
+.cropper-view-box {
+  outline: 9999px solid rgba(0,0,0,0.6); /* oscura tutto tranne il cerchio */
+}
+
+.cropper-face {
+  background: none !important;
+}
+.editor {
   position: absolute;
   inset: 0;
   background: white;
